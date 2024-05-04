@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/instruments/synthetic.rs`."><title>synthetic.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b21aa549bf6d91ff.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (a8a1d3a77 2024-04-29)" data-channel="nightly" data-search-js="search-bf21c90c8c1d92b1.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-e32f0c247825364d.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../nautilus_model/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/instruments/synthetic.rs`."><title>synthetic.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b21aa549bf6d91ff.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (d2d24e395 2024-05-03)" data-channel="nightly" data-search-js="search-bf21c90c8c1d92b1.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-e32f0c247825364d.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../nautilus_model/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -195,40 +195,6 @@
 <a href="#195" id="195">195</a>
 <a href="#196" id="196">196</a>
 <a href="#197" id="197">197</a>
-<a href="#198" id="198">198</a>
-<a href="#199" id="199">199</a>
-<a href="#200" id="200">200</a>
-<a href="#201" id="201">201</a>
-<a href="#202" id="202">202</a>
-<a href="#203" id="203">203</a>
-<a href="#204" id="204">204</a>
-<a href="#205" id="205">205</a>
-<a href="#206" id="206">206</a>
-<a href="#207" id="207">207</a>
-<a href="#208" id="208">208</a>
-<a href="#209" id="209">209</a>
-<a href="#210" id="210">210</a>
-<a href="#211" id="211">211</a>
-<a href="#212" id="212">212</a>
-<a href="#213" id="213">213</a>
-<a href="#214" id="214">214</a>
-<a href="#215" id="215">215</a>
-<a href="#216" id="216">216</a>
-<a href="#217" id="217">217</a>
-<a href="#218" id="218">218</a>
-<a href="#219" id="219">219</a>
-<a href="#220" id="220">220</a>
-<a href="#221" id="221">221</a>
-<a href="#222" id="222">222</a>
-<a href="#223" id="223">223</a>
-<a href="#224" id="224">224</a>
-<a href="#225" id="225">225</a>
-<a href="#226" id="226">226</a>
-<a href="#227" id="227">227</a>
-<a href="#228" id="228">228</a>
-<a href="#229" id="229">229</a>
-<a href="#230" id="230">230</a>
-<a href="#231" id="231">231</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -249,6 +215,7 @@
     hash::{Hash, Hasher},
 };
 
+<span class="kw">use </span>derive_builder::Builder;
 <span class="kw">use </span>evalexpr::{ContextWithMutableVariables, HashMapContext, Node, Value};
 <span class="kw">use </span>nautilus_core::nanos::UnixNanos;
 
@@ -259,7 +226,7 @@
 
 <span class="doccomment">/// Represents a synthetic instrument with prices derived from component instruments using a
 /// formula.
-</span><span class="attr">#[derive(Clone, Debug)]
+</span><span class="attr">#[derive(Clone, Debug, Builder)]
 #[cfg_attr(
     feature = <span class="string">"python"</span>,
     pyo3::pyclass(module = <span class="string">"nautilus_trader.core.nautilus_pyo3.model"</span>)
@@ -378,82 +345,47 @@
     }
 }
 
-<span class="attr">#[cfg(test)]
+<span class="comment">////////////////////////////////////////////////////////////////////////////////
+// Tests
+///////////////////////////////////////////////////////////////////////////////
+</span><span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span>rstest::rstest;
 
     <span class="kw">use super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use </span><span class="kw">crate</span>::identifiers::{instrument_id::InstrumentId, symbol::Symbol};
 
     <span class="attr">#[rstest]
     </span><span class="kw">fn </span>test_calculate_from_map() {
-        <span class="kw">let </span>btc_binance = InstrumentId::from(<span class="string">"BTC.BINANCE"</span>);
-        <span class="kw">let </span>ltc_binance = InstrumentId::from(<span class="string">"LTC.BINANCE"</span>);
-        <span class="kw">let </span>formula = <span class="string">"(BTC.BINANCE + LTC.BINANCE) / 2"</span>.to_string();
-        <span class="kw">let </span><span class="kw-2">mut </span>synth = SyntheticInstrument::new(
-            Symbol::new(<span class="string">"BTC-LTC"</span>).unwrap(),
-            <span class="number">2</span>,
-            <span class="macro">vec!</span>[btc_binance, ltc_binance],
-            formula.clone(),
-            <span class="number">0</span>.into(),
-            <span class="number">0</span>.into(),
-        )
-        .unwrap();
-
+        <span class="kw">let </span><span class="kw-2">mut </span>synth = SyntheticInstrument::default();
         <span class="kw">let </span><span class="kw-2">mut </span>inputs = HashMap::new();
         inputs.insert(<span class="string">"BTC.BINANCE"</span>.to_string(), <span class="number">100.0</span>);
         inputs.insert(<span class="string">"LTC.BINANCE"</span>.to_string(), <span class="number">200.0</span>);
-
         <span class="kw">let </span>price = synth.calculate_from_map(<span class="kw-2">&amp;</span>inputs).unwrap();
 
         <span class="macro">assert_eq!</span>(price.as_f64(), <span class="number">150.0</span>);
-        <span class="macro">assert_eq!</span>(synth.formula, formula);
+        <span class="macro">assert_eq!</span>(
+            synth.formula,
+            <span class="string">"(BTC.BINANCE + LTC.BINANCE) / 2.0"</span>.to_string()
+        );
     }
 
     <span class="attr">#[rstest]
     </span><span class="kw">fn </span>test_calculate() {
-        <span class="kw">let </span>btc_binance = InstrumentId::from(<span class="string">"BTC.BINANCE"</span>);
-        <span class="kw">let </span>ltc_binance = InstrumentId::from(<span class="string">"LTC.BINANCE"</span>);
-        <span class="kw">let </span>formula = <span class="string">"(BTC.BINANCE + LTC.BINANCE) / 2.0"</span>.to_string();
-        <span class="kw">let </span><span class="kw-2">mut </span>synth = SyntheticInstrument::new(
-            Symbol::new(<span class="string">"BTC-LTC"</span>).unwrap(),
-            <span class="number">2</span>,
-            <span class="macro">vec!</span>[btc_binance, ltc_binance],
-            formula.clone(),
-            <span class="number">0</span>.into(),
-            <span class="number">0</span>.into(),
-        )
-        .unwrap();
-
+        <span class="kw">let </span><span class="kw-2">mut </span>synth = SyntheticInstrument::default();
         <span class="kw">let </span>inputs = <span class="macro">vec!</span>[<span class="number">100.0</span>, <span class="number">200.0</span>];
         <span class="kw">let </span>price = synth.calculate(<span class="kw-2">&amp;</span>inputs).unwrap();
-
         <span class="macro">assert_eq!</span>(price.as_f64(), <span class="number">150.0</span>);
-        <span class="macro">assert_eq!</span>(synth.formula, formula);
     }
 
     <span class="attr">#[rstest]
     </span><span class="kw">fn </span>test_change_formula() {
-        <span class="kw">let </span>btc_binance = InstrumentId::from(<span class="string">"BTC.BINANCE"</span>);
-        <span class="kw">let </span>ltc_binance = InstrumentId::from(<span class="string">"LTC.BINANCE"</span>);
-        <span class="kw">let </span>formula = <span class="string">"(BTC.BINANCE + LTC.BINANCE) / 2"</span>.to_string();
-        <span class="kw">let </span><span class="kw-2">mut </span>synth = SyntheticInstrument::new(
-            Symbol::new(<span class="string">"BTC-LTC"</span>).unwrap(),
-            <span class="number">2</span>,
-            <span class="macro">vec!</span>[btc_binance, ltc_binance],
-            formula,
-            <span class="number">0</span>.into(),
-            <span class="number">0</span>.into(),
-        )
-        .unwrap();
-
+        <span class="kw">let </span><span class="kw-2">mut </span>synth = SyntheticInstrument::default();
         <span class="kw">let </span>new_formula = <span class="string">"(BTC.BINANCE + LTC.BINANCE) / 4"</span>.to_string();
         synth.change_formula(new_formula.clone()).unwrap();
 
         <span class="kw">let </span><span class="kw-2">mut </span>inputs = HashMap::new();
         inputs.insert(<span class="string">"BTC.BINANCE"</span>.to_string(), <span class="number">100.0</span>);
         inputs.insert(<span class="string">"LTC.BINANCE"</span>.to_string(), <span class="number">200.0</span>);
-
         <span class="kw">let </span>price = synth.calculate_from_map(<span class="kw-2">&amp;</span>inputs).unwrap();
 
         <span class="macro">assert_eq!</span>(price.as_f64(), <span class="number">75.0</span>);

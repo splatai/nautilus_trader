@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/data/bar.rs`."><title>bar.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b21aa549bf6d91ff.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (a8a1d3a77 2024-04-29)" data-channel="nightly" data-search-js="search-bf21c90c8c1d92b1.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-e32f0c247825364d.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../nautilus_model/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/data/bar.rs`."><title>bar.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b21aa549bf6d91ff.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (d2d24e395 2024-05-03)" data-channel="nightly" data-search-js="search-bf21c90c8c1d92b1.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-e32f0c247825364d.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../nautilus_model/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -542,42 +542,6 @@
 <a href="#542" id="542">542</a>
 <a href="#543" id="543">543</a>
 <a href="#544" id="544">544</a>
-<a href="#545" id="545">545</a>
-<a href="#546" id="546">546</a>
-<a href="#547" id="547">547</a>
-<a href="#548" id="548">548</a>
-<a href="#549" id="549">549</a>
-<a href="#550" id="550">550</a>
-<a href="#551" id="551">551</a>
-<a href="#552" id="552">552</a>
-<a href="#553" id="553">553</a>
-<a href="#554" id="554">554</a>
-<a href="#555" id="555">555</a>
-<a href="#556" id="556">556</a>
-<a href="#557" id="557">557</a>
-<a href="#558" id="558">558</a>
-<a href="#559" id="559">559</a>
-<a href="#560" id="560">560</a>
-<a href="#561" id="561">561</a>
-<a href="#562" id="562">562</a>
-<a href="#563" id="563">563</a>
-<a href="#564" id="564">564</a>
-<a href="#565" id="565">565</a>
-<a href="#566" id="566">566</a>
-<a href="#567" id="567">567</a>
-<a href="#568" id="568">568</a>
-<a href="#569" id="569">569</a>
-<a href="#570" id="570">570</a>
-<a href="#571" id="571">571</a>
-<a href="#572" id="572">572</a>
-<a href="#573" id="573">573</a>
-<a href="#574" id="574">574</a>
-<a href="#575" id="575">575</a>
-<a href="#576" id="576">576</a>
-<a href="#577" id="577">577</a>
-<a href="#578" id="578">578</a>
-<a href="#579" id="579">579</a>
-<a href="#580" id="580">580</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -602,6 +566,7 @@
     str::FromStr,
 };
 
+<span class="kw">use </span>derive_builder::Builder;
 <span class="kw">use </span>indexmap::IndexMap;
 <span class="kw">use </span>nautilus_core::{nanos::UnixNanos, serialization::Serializable};
 <span class="kw">use </span>serde::{Deserialize, Deserializer, Serialize, Serializer};
@@ -609,13 +574,14 @@
 <span class="kw">use crate</span>::{
     enums::{AggregationSource, BarAggregation, PriceType},
     identifiers::instrument_id::InstrumentId,
+    polymorphism::GetTsInit,
     types::{price::Price, quantity::Quantity},
 };
 
 <span class="doccomment">/// Represents a bar aggregation specification including a step, aggregation
 /// method/rule and price type.
 </span><span class="attr">#[repr(C)]
-#[derive(Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Debug, Serialize, Deserialize)]
+#[derive(Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Debug, Serialize, Deserialize, Builder)]
 #[cfg_attr(
     feature = <span class="string">"python"</span>,
     pyo3::pyclass(module = <span class="string">"nautilus_trader.core.nautilus_pyo3.model"</span>)
@@ -863,8 +829,6 @@
     }
 }
 
-<span class="kw">impl </span>Serializable <span class="kw">for </span>Bar {}
-
 <span class="kw">impl </span>Display <span class="kw">for </span>Bar {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="macro">write!</span>(
@@ -875,47 +839,11 @@
     }
 }
 
-<span class="comment">////////////////////////////////////////////////////////////////////////////////
-// Stubs
-////////////////////////////////////////////////////////////////////////////////
-</span><span class="attr">#[cfg(feature = <span class="string">"stubs"</span>)]
-</span><span class="kw">pub mod </span>stubs {
-    <span class="kw">use </span>nautilus_core::nanos::UnixNanos;
-    <span class="kw">use </span>rstest::fixture;
+<span class="kw">impl </span>Serializable <span class="kw">for </span>Bar {}
 
-    <span class="kw">use crate</span>::{
-        data::bar::{Bar, BarSpecification, BarType},
-        enums::{AggregationSource, BarAggregation, PriceType},
-        identifiers::{instrument_id::InstrumentId, symbol::Symbol, venue::Venue},
-        types::{price::Price, quantity::Quantity},
-    };
-
-    <span class="attr">#[fixture]
-    </span><span class="kw">pub fn </span>stub_bar() -&gt; Bar {
-        <span class="kw">let </span>instrument_id = InstrumentId {
-            symbol: Symbol::new(<span class="string">"AUDUSD"</span>).unwrap(),
-            venue: Venue::new(<span class="string">"SIM"</span>).unwrap(),
-        };
-        <span class="kw">let </span>bar_spec = BarSpecification {
-            step: <span class="number">1</span>,
-            aggregation: BarAggregation::Minute,
-            price_type: PriceType::Bid,
-        };
-        <span class="kw">let </span>bar_type = BarType {
-            instrument_id,
-            spec: bar_spec,
-            aggregation_source: AggregationSource::External,
-        };
-        Bar {
-            bar_type,
-            open: Price::from(<span class="string">"1.00001"</span>),
-            high: Price::from(<span class="string">"1.00004"</span>),
-            low: Price::from(<span class="string">"1.00002"</span>),
-            close: Price::from(<span class="string">"1.00003"</span>),
-            volume: Quantity::from(<span class="string">"100000"</span>),
-            ts_event: UnixNanos::default(),
-            ts_init: UnixNanos::from(<span class="number">1</span>),
-        }
+<span class="kw">impl </span>GetTsInit <span class="kw">for </span>Bar {
+    <span class="kw">fn </span>ts_init(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; UnixNanos {
+        <span class="self">self</span>.ts_init
     }
 }
 
@@ -926,7 +854,7 @@
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span>rstest::rstest;
 
-    <span class="kw">use super</span>::{stubs::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
     <span class="kw">use crate</span>::{
         enums::BarAggregation,
         identifiers::{symbol::Symbol, venue::Venue},
@@ -1143,16 +1071,16 @@
     }
 
     <span class="attr">#[rstest]
-    </span><span class="kw">fn </span>test_json_serialization(stub_bar: Bar) {
-        <span class="kw">let </span>bar = stub_bar;
+    </span><span class="kw">fn </span>test_json_serialization() {
+        <span class="kw">let </span>bar = Bar::default();
         <span class="kw">let </span>serialized = bar.as_json_bytes().unwrap();
         <span class="kw">let </span>deserialized = Bar::from_json_bytes(serialized).unwrap();
         <span class="macro">assert_eq!</span>(deserialized, bar);
     }
 
     <span class="attr">#[rstest]
-    </span><span class="kw">fn </span>test_msgpack_serialization(stub_bar: Bar) {
-        <span class="kw">let </span>bar = stub_bar;
+    </span><span class="kw">fn </span>test_msgpack_serialization() {
+        <span class="kw">let </span>bar = Bar::default();
         <span class="kw">let </span>serialized = bar.as_msgpack_bytes().unwrap();
         <span class="kw">let </span>deserialized = Bar::from_msgpack_bytes(serialized).unwrap();
         <span class="macro">assert_eq!</span>(deserialized, bar);

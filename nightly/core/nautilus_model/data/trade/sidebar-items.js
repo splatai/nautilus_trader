@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["TradeTickBuilderError"],"mod":["stubs"],"struct":["TradeTick","TradeTickBuilder"]};
+window.SIDEBAR_ITEMS = {"enum":["TradeTickBuilderError"],"struct":["TradeTick","TradeTickBuilder"]};
