@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["general","instruments","types"]};
+window.SIDEBAR_ITEMS = {"mod":["general","instruments","orders","types"]};

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/orders/base.rs`."><title>base.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b21aa549bf6d91ff.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (d2d24e395 2024-05-03)" data-channel="nightly" data-search-js="search-bf21c90c8c1d92b1.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-e32f0c247825364d.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../nautilus_model/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/orders/base.rs`."><title>base.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (6e1d94708 2024-05-10)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -816,7 +816,7 @@
     },
     events::order::{
         accepted::OrderAccepted, cancel_rejected::OrderCancelRejected, canceled::OrderCanceled,
-        denied::OrderDenied, emulated::OrderEmulated, event::OrderEvent, expired::OrderExpired,
+        denied::OrderDenied, emulated::OrderEmulated, event::OrderEventAny, expired::OrderExpired,
         filled::OrderFilled, initialized::OrderInitialized, modify_rejected::OrderModifyRejected,
         pending_cancel::OrderPendingCancel, pending_update::OrderPendingUpdate,
         rejected::OrderRejected, released::OrderReleased, submitted::OrderSubmitted,
@@ -883,76 +883,76 @@
 
 <span class="kw">impl </span>OrderStatus {
     <span class="attr">#[rustfmt::skip]
-    </span><span class="kw">pub fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: <span class="kw-2">&amp;</span>OrderEvent) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, OrderError&gt; {
+    </span><span class="kw">pub fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: <span class="kw-2">&amp;</span>OrderEventAny) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, OrderError&gt; {
         <span class="kw">let </span>new_state = <span class="kw">match </span>(<span class="self">self</span>, event) {
-            (<span class="self">Self</span>::Initialized, OrderEvent::Denied(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Denied,
-            (<span class="self">Self</span>::Initialized, OrderEvent::Emulated(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Emulated,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Initialized, OrderEvent::Released(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Released,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Initialized, OrderEvent::Submitted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Submitted,
-            (<span class="self">Self</span>::Initialized, OrderEvent::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,  <span class="comment">// External orders
-            </span>(<span class="self">Self</span>::Initialized, OrderEvent::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,  <span class="comment">// External orders
-            </span>(<span class="self">Self</span>::Initialized, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// External orders
-            </span>(<span class="self">Self</span>::Initialized, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,  <span class="comment">// External orders
-            </span>(<span class="self">Self</span>::Initialized, OrderEvent::Triggered(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Triggered, <span class="comment">// External orders
-            </span>(<span class="self">Self</span>::Emulated, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Emulated, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Emulated, OrderEvent::Released(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Released,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Released, OrderEvent::Submitted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Submitted,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Released, OrderEvent::Denied(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Denied,  <span class="comment">// Emulated orders
-            </span>(<span class="self">Self</span>::Released, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// Execution algo
-            </span>(<span class="self">Self</span>::Submitted, OrderEvent::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
-            (<span class="self">Self</span>::Submitted, OrderEvent::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
-            (<span class="self">Self</span>::Submitted, OrderEvent::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
-            (<span class="self">Self</span>::Submitted, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// FOK and IOC cases
-            </span>(<span class="self">Self</span>::Submitted, OrderEvent::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,
-            (<span class="self">Self</span>::Submitted, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
-            (<span class="self">Self</span>::Submitted, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
-            (<span class="self">Self</span>::Accepted, OrderEvent::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,  <span class="comment">// StopLimit order
-            </span>(<span class="self">Self</span>::Accepted, OrderEvent::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
-            (<span class="self">Self</span>::Accepted, OrderEvent::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
-            (<span class="self">Self</span>::Accepted, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
-            (<span class="self">Self</span>::Accepted, OrderEvent::Triggered(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Triggered,
-            (<span class="self">Self</span>::Accepted, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
-            (<span class="self">Self</span>::Accepted, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
-            (<span class="self">Self</span>::Accepted, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
-            (<span class="self">Self</span>::Canceled, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,  <span class="comment">// Real world possibility
-            </span>(<span class="self">Self</span>::Canceled, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,  <span class="comment">// Real world possibility
-            </span>(<span class="self">Self</span>::PendingUpdate, OrderEvent::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::Triggered(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Triggered,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,  <span class="comment">// Allow multiple requests
-            </span>(<span class="self">Self</span>::PendingUpdate, OrderEvent::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
-            (<span class="self">Self</span>::PendingUpdate, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
-            (<span class="self">Self</span>::PendingCancel, OrderEvent::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
-            (<span class="self">Self</span>::PendingCancel, OrderEvent::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,  <span class="comment">// Allow multiple requests
-            </span>(<span class="self">Self</span>::PendingCancel, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
-            (<span class="self">Self</span>::PendingCancel, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
-            (<span class="self">Self</span>::PendingCancel, OrderEvent::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,  <span class="comment">// Allow failed cancel requests
-            </span>(<span class="self">Self</span>::PendingCancel, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
-            (<span class="self">Self</span>::PendingCancel, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
-            (<span class="self">Self</span>::Triggered, OrderEvent::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
-            (<span class="self">Self</span>::Triggered, OrderEvent::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
-            (<span class="self">Self</span>::Triggered, OrderEvent::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
-            (<span class="self">Self</span>::Triggered, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
-            (<span class="self">Self</span>::Triggered, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
-            (<span class="self">Self</span>::Triggered, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
-            (<span class="self">Self</span>::Triggered, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
-            (<span class="self">Self</span>::PartiallyFilled, OrderEvent::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
-            (<span class="self">Self</span>::PartiallyFilled, OrderEvent::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
-            (<span class="self">Self</span>::PartiallyFilled, OrderEvent::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
-            (<span class="self">Self</span>::PartiallyFilled, OrderEvent::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
-            (<span class="self">Self</span>::PartiallyFilled, OrderEvent::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
-            (<span class="self">Self</span>::PartiallyFilled, OrderEvent::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
+            (<span class="self">Self</span>::Initialized, OrderEventAny::Denied(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Denied,
+            (<span class="self">Self</span>::Initialized, OrderEventAny::Emulated(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Emulated,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Initialized, OrderEventAny::Released(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Released,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Initialized, OrderEventAny::Submitted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Submitted,
+            (<span class="self">Self</span>::Initialized, OrderEventAny::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,  <span class="comment">// External orders
+            </span>(<span class="self">Self</span>::Initialized, OrderEventAny::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,  <span class="comment">// External orders
+            </span>(<span class="self">Self</span>::Initialized, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// External orders
+            </span>(<span class="self">Self</span>::Initialized, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,  <span class="comment">// External orders
+            </span>(<span class="self">Self</span>::Initialized, OrderEventAny::Triggered(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Triggered, <span class="comment">// External orders
+            </span>(<span class="self">Self</span>::Emulated, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Emulated, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Emulated, OrderEventAny::Released(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Released,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Released, OrderEventAny::Submitted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Submitted,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Released, OrderEventAny::Denied(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Denied,  <span class="comment">// Emulated orders
+            </span>(<span class="self">Self</span>::Released, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// Execution algo
+            </span>(<span class="self">Self</span>::Submitted, OrderEventAny::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
+            (<span class="self">Self</span>::Submitted, OrderEventAny::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
+            (<span class="self">Self</span>::Submitted, OrderEventAny::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
+            (<span class="self">Self</span>::Submitted, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,  <span class="comment">// FOK and IOC cases
+            </span>(<span class="self">Self</span>::Submitted, OrderEventAny::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,
+            (<span class="self">Self</span>::Submitted, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
+            (<span class="self">Self</span>::Submitted, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,  <span class="comment">// StopLimit order
+            </span>(<span class="self">Self</span>::Accepted, OrderEventAny::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::Triggered(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Triggered,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
+            (<span class="self">Self</span>::Accepted, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
+            (<span class="self">Self</span>::Canceled, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,  <span class="comment">// Real world possibility
+            </span>(<span class="self">Self</span>::Canceled, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,  <span class="comment">// Real world possibility
+            </span>(<span class="self">Self</span>::PendingUpdate, OrderEventAny::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::Triggered(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Triggered,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,  <span class="comment">// Allow multiple requests
+            </span>(<span class="self">Self</span>::PendingUpdate, OrderEventAny::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
+            (<span class="self">Self</span>::PendingUpdate, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
+            (<span class="self">Self</span>::PendingCancel, OrderEventAny::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
+            (<span class="self">Self</span>::PendingCancel, OrderEventAny::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,  <span class="comment">// Allow multiple requests
+            </span>(<span class="self">Self</span>::PendingCancel, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
+            (<span class="self">Self</span>::PendingCancel, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
+            (<span class="self">Self</span>::PendingCancel, OrderEventAny::Accepted(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Accepted,  <span class="comment">// Allow failed cancel requests
+            </span>(<span class="self">Self</span>::PendingCancel, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
+            (<span class="self">Self</span>::PendingCancel, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::Rejected(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Rejected,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
+            (<span class="self">Self</span>::Triggered, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
+            (<span class="self">Self</span>::PartiallyFilled, OrderEventAny::PendingUpdate(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingUpdate,
+            (<span class="self">Self</span>::PartiallyFilled, OrderEventAny::PendingCancel(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PendingCancel,
+            (<span class="self">Self</span>::PartiallyFilled, OrderEventAny::Canceled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Canceled,
+            (<span class="self">Self</span>::PartiallyFilled, OrderEventAny::Expired(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Expired,
+            (<span class="self">Self</span>::PartiallyFilled, OrderEventAny::PartiallyFilled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::PartiallyFilled,
+            (<span class="self">Self</span>::PartiallyFilled, OrderEventAny::Filled(<span class="kw">_</span>)) =&gt; <span class="self">Self</span>::Filled,
             <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(OrderError::InvalidStateTransition),
         };
         <span class="prelude-val">Ok</span>(new_state)
     }
 }
 
-<span class="kw">pub trait </span>Order {
+<span class="kw">pub trait </span>Order: <span class="lifetime">'static </span>+ Send {
     <span class="kw">fn </span>into_any(<span class="self">self</span>) -&gt; OrderAny;
     <span class="kw">fn </span>status(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; OrderStatus;
     <span class="kw">fn </span>trader_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TraderId;
@@ -999,11 +999,11 @@
     <span class="kw">fn </span>ts_init(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; UnixNanos;
     <span class="kw">fn </span>ts_last(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; UnixNanos;
 
-    <span class="kw">fn </span>apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: OrderEvent) -&gt; <span class="prelude-ty">Result</span>&lt;(), OrderError&gt;;
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: OrderEventAny) -&gt; <span class="prelude-ty">Result</span>&lt;(), OrderError&gt;;
     <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: <span class="kw-2">&amp;</span>OrderUpdated);
 
-    <span class="kw">fn </span>events(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span>OrderEvent&gt;;
-    <span class="kw">fn </span>last_event(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>OrderEvent {
+    <span class="kw">fn </span>events(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span>OrderEventAny&gt;;
+    <span class="kw">fn </span>last_event(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>OrderEventAny {
         <span class="comment">// SAFETY: Unwrap safe as `Order` specification guarantees at least one event (`OrderInitialized`)
         </span><span class="self">self</span>.events().last().unwrap()
     }
@@ -1169,7 +1169,7 @@
 
 <span class="attr">#[derive(Clone, Debug, Serialize, Deserialize)]
 </span><span class="kw">pub struct </span>OrderCore {
-    <span class="kw">pub </span>events: Vec&lt;OrderEvent&gt;,
+    <span class="kw">pub </span>events: Vec&lt;OrderEventAny&gt;,
     <span class="kw">pub </span>commissions: HashMap&lt;Currency, Money&gt;,
     <span class="kw">pub </span>venue_order_ids: Vec&lt;VenueOrderId&gt;,
     <span class="kw">pub </span>trade_ids: Vec&lt;TradeId&gt;,
@@ -1210,7 +1210,7 @@
 
 <span class="kw">impl </span>OrderCore {
     <span class="kw">pub fn </span>new(init: OrderInitialized) -&gt; anyhow::Result&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">let </span>events: Vec&lt;OrderEvent&gt; = <span class="macro">vec!</span>[OrderEvent::Initialized(init.clone())];
+        <span class="kw">let </span>events: Vec&lt;OrderEventAny&gt; = <span class="macro">vec!</span>[OrderEventAny::Initialized(init.clone())];
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
             events,
             commissions: HashMap::new(),
@@ -1254,7 +1254,7 @@
         })
     }
 
-    <span class="kw">pub fn </span>apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: OrderEvent) -&gt; <span class="prelude-ty">Result</span>&lt;(), OrderError&gt; {
+    <span class="kw">pub fn </span>apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: OrderEventAny) -&gt; <span class="prelude-ty">Result</span>&lt;(), OrderError&gt; {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.client_order_id, event.client_order_id());
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.strategy_id, event.strategy_id());
 
@@ -1263,23 +1263,23 @@
         <span class="self">self</span>.status = new_status;
 
         <span class="kw">match </span><span class="kw-2">&amp;</span>event {
-            OrderEvent::Initialized(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(OrderError::AlreadyInitialized),
-            OrderEvent::Denied(event) =&gt; <span class="self">self</span>.denied(event),
-            OrderEvent::Emulated(event) =&gt; <span class="self">self</span>.emulated(event),
-            OrderEvent::Released(event) =&gt; <span class="self">self</span>.released(event),
-            OrderEvent::Submitted(event) =&gt; <span class="self">self</span>.submitted(event),
-            OrderEvent::Rejected(event) =&gt; <span class="self">self</span>.rejected(event),
-            OrderEvent::Accepted(event) =&gt; <span class="self">self</span>.accepted(event),
-            OrderEvent::PendingUpdate(event) =&gt; <span class="self">self</span>.pending_update(event),
-            OrderEvent::PendingCancel(event) =&gt; <span class="self">self</span>.pending_cancel(event),
-            OrderEvent::ModifyRejected(event) =&gt; <span class="self">self</span>.modify_rejected(event),
-            OrderEvent::CancelRejected(event) =&gt; <span class="self">self</span>.cancel_rejected(event),
-            OrderEvent::Updated(event) =&gt; <span class="self">self</span>.updated(event),
-            OrderEvent::Triggered(event) =&gt; <span class="self">self</span>.triggered(event),
-            OrderEvent::Canceled(event) =&gt; <span class="self">self</span>.canceled(event),
-            OrderEvent::Expired(event) =&gt; <span class="self">self</span>.expired(event),
-            OrderEvent::PartiallyFilled(event) =&gt; <span class="self">self</span>.filled(event),
-            OrderEvent::Filled(event) =&gt; <span class="self">self</span>.filled(event),
+            OrderEventAny::Initialized(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(OrderError::AlreadyInitialized),
+            OrderEventAny::Denied(event) =&gt; <span class="self">self</span>.denied(event),
+            OrderEventAny::Emulated(event) =&gt; <span class="self">self</span>.emulated(event),
+            OrderEventAny::Released(event) =&gt; <span class="self">self</span>.released(event),
+            OrderEventAny::Submitted(event) =&gt; <span class="self">self</span>.submitted(event),
+            OrderEventAny::Rejected(event) =&gt; <span class="self">self</span>.rejected(event),
+            OrderEventAny::Accepted(event) =&gt; <span class="self">self</span>.accepted(event),
+            OrderEventAny::PendingUpdate(event) =&gt; <span class="self">self</span>.pending_update(event),
+            OrderEventAny::PendingCancel(event) =&gt; <span class="self">self</span>.pending_cancel(event),
+            OrderEventAny::ModifyRejected(event) =&gt; <span class="self">self</span>.modify_rejected(event),
+            OrderEventAny::CancelRejected(event) =&gt; <span class="self">self</span>.cancel_rejected(event),
+            OrderEventAny::Updated(event) =&gt; <span class="self">self</span>.updated(event),
+            OrderEventAny::Triggered(event) =&gt; <span class="self">self</span>.triggered(event),
+            OrderEventAny::Canceled(event) =&gt; <span class="self">self</span>.canceled(event),
+            OrderEventAny::Expired(event) =&gt; <span class="self">self</span>.expired(event),
+            OrderEventAny::PartiallyFilled(event) =&gt; <span class="self">self</span>.filled(event),
+            OrderEventAny::Filled(event) =&gt; <span class="self">self</span>.filled(event),
         }
 
         <span class="self">self</span>.ts_last = event.ts_event();
@@ -1441,7 +1441,7 @@
     }
 
     <span class="attr">#[must_use]
-    </span><span class="kw">pub fn </span>init_event(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;OrderEvent&gt; {
+    </span><span class="kw">pub fn </span>init_event(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;OrderEventAny&gt; {
         <span class="self">self</span>.events.first().cloned()
     }
 }
@@ -1540,7 +1540,7 @@
     </span><span class="kw">fn </span>test_order_state_transition_denied() {
         <span class="kw">let </span><span class="kw-2">mut </span>order: MarketOrder = OrderInitializedBuilder::default().build().unwrap().into();
         <span class="kw">let </span>denied = OrderDeniedBuilder::default().build().unwrap();
-        <span class="kw">let </span>event = OrderEvent::Denied(denied);
+        <span class="kw">let </span>event = OrderEventAny::Denied(denied);
 
         order.apply(event.clone()).unwrap();
 
@@ -1559,9 +1559,9 @@
         <span class="kw">let </span>filled = OrderFilledBuilder::default().build().unwrap();
 
         <span class="kw">let </span><span class="kw-2">mut </span>order: MarketOrder = init.clone().into();
-        order.apply(OrderEvent::Submitted(submitted)).unwrap();
-        order.apply(OrderEvent::Accepted(accepted)).unwrap();
-        order.apply(OrderEvent::Filled(filled)).unwrap();
+        order.apply(OrderEventAny::Submitted(submitted)).unwrap();
+        order.apply(OrderEventAny::Accepted(accepted)).unwrap();
+        order.apply(OrderEventAny::Filled(filled)).unwrap();
 
         <span class="macro">assert_eq!</span>(order.client_order_id, init.client_order_id);
         <span class="macro">assert_eq!</span>(order.status(), OrderStatus::Filled);
