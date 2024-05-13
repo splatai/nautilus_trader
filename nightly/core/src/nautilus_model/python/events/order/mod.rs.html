@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/python/events/order/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (6e1d94708 2024-05-10)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../../src-files.js"></script><script defer src="../../../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/python/events/order/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (78a775127 2024-05-11)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../../src-files.js"></script><script defer src="../../../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -119,15 +119,6 @@
 <a href="#119" id="119">119</a>
 <a href="#120" id="120">120</a>
 <a href="#121" id="121">121</a>
-<a href="#122" id="122">122</a>
-<a href="#123" id="123">123</a>
-<a href="#124" id="124">124</a>
-<a href="#125" id="125">125</a>
-<a href="#126" id="126">126</a>
-<a href="#127" id="127">127</a>
-<a href="#128" id="128">128</a>
-<a href="#129" id="129">129</a>
-<a href="#130" id="130">130</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -155,10 +146,24 @@
     triggered::OrderTriggered, updated::OrderUpdated,
 };
 
-<span class="kw">pub fn </span>convert_order_event_to_pyobject(
-    py: Python,
-    order_event: OrderEventAny,
-) -&gt; PyResult&lt;PyObject&gt; {
+<span class="kw">pub mod </span>accepted;
+<span class="kw">pub mod </span>cancel_rejected;
+<span class="kw">pub mod </span>canceled;
+<span class="kw">pub mod </span>denied;
+<span class="kw">pub mod </span>emulated;
+<span class="kw">pub mod </span>expired;
+<span class="kw">pub mod </span>filled;
+<span class="kw">pub mod </span>initialized;
+<span class="kw">pub mod </span>modify_rejected;
+<span class="kw">pub mod </span>pending_cancel;
+<span class="kw">pub mod </span>pending_update;
+<span class="kw">pub mod </span>rejected;
+<span class="kw">pub mod </span>released;
+<span class="kw">pub mod </span>submitted;
+<span class="kw">pub mod </span>triggered;
+<span class="kw">pub mod </span>updated;
+
+<span class="kw">pub fn </span>order_event_to_pyobject(py: Python, order_event: OrderEventAny) -&gt; PyResult&lt;PyObject&gt; {
     <span class="kw">match </span>order_event {
         OrderEventAny::Initialized(event) =&gt; <span class="prelude-val">Ok</span>(event.into_py(py)),
         OrderEventAny::Denied(event) =&gt; <span class="prelude-val">Ok</span>(event.into_py(py)),
@@ -180,82 +185,59 @@
     }
 }
 
-<span class="kw">pub fn </span>convert_pyobject_to_order_event(
-    py: Python,
-    order_event: PyObject,
-) -&gt; PyResult&lt;OrderEventAny&gt; {
-    <span class="kw">let </span>order_event_type = order_event
-        .getattr(py, <span class="string">"order_event_type"</span>)<span class="question-mark">?
-        </span>.extract::&lt;String&gt;(py)<span class="question-mark">?</span>;
-    <span class="kw">if </span>order_event_type == <span class="string">"OrderAccepted" </span>{
-        <span class="kw">let </span>order_accepted = order_event.extract::&lt;OrderAccepted&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Accepted(order_accepted))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderCanceled" </span>{
-        <span class="kw">let </span>order_canceled = order_event.extract::&lt;OrderCanceled&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Canceled(order_canceled))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderCancelRejected" </span>{
-        <span class="kw">let </span>order_cancel_rejected = order_event.extract::&lt;OrderCancelRejected&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::CancelRejected(order_cancel_rejected))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderDenied" </span>{
-        <span class="kw">let </span>order_denied = order_event.extract::&lt;OrderDenied&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Denied(order_denied))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderEmulated" </span>{
-        <span class="kw">let </span>order_emulated = order_event.extract::&lt;OrderEmulated&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Emulated(order_emulated))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderExpired" </span>{
-        <span class="kw">let </span>order_expired = order_event.extract::&lt;OrderExpired&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Expired(order_expired))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderFilled" </span>{
-        <span class="kw">let </span>order_filled = order_event.extract::&lt;OrderFilled&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Filled(order_filled))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderInitialized" </span>{
-        <span class="kw">let </span>order_initialized = order_event.extract::&lt;OrderInitialized&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Initialized(order_initialized))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderModifyRejected" </span>{
-        <span class="kw">let </span>order_modify_rejected = order_event.extract::&lt;OrderModifyRejected&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::ModifyRejected(order_modify_rejected))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderPendingCancel" </span>{
-        <span class="kw">let </span>order_pending_cancel = order_event.extract::&lt;OrderPendingCancel&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::PendingCancel(order_pending_cancel))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderPendingUpdate" </span>{
-        <span class="kw">let </span>order_pending_update = order_event.extract::&lt;OrderPendingUpdate&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::PendingUpdate(order_pending_update))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderRejected" </span>{
-        <span class="kw">let </span>order_rejected = order_event.extract::&lt;OrderRejected&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Rejected(order_rejected))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderReleased" </span>{
-        <span class="kw">let </span>order_released = order_event.extract::&lt;OrderReleased&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Released(order_released))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderSubmitted" </span>{
-        <span class="kw">let </span>order_submitted = order_event.extract::&lt;OrderSubmitted&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Submitted(order_submitted))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderTriggered" </span>{
-        <span class="kw">let </span>order_triggered = order_event.extract::&lt;OrderTriggered&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Triggered(order_triggered))
-    } <span class="kw">else if </span>order_event_type == <span class="string">"OrderUpdated" </span>{
-        <span class="kw">let </span>order_updated = order_event.extract::&lt;OrderUpdated&gt;(py)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(OrderEventAny::Updated(order_updated))
-    } <span class="kw">else </span>{
-        <span class="prelude-val">Err</span>(to_pyvalue_err(
-            <span class="string">"Error in conversion from pyobject to order event"</span>,
-        ))
+<span class="kw">pub fn </span>pyobject_to_order_event(py: Python, order_event: PyObject) -&gt; PyResult&lt;OrderEventAny&gt; {
+    <span class="kw">match </span>order_event.getattr(py, <span class="string">"type_str"</span>)<span class="question-mark">?</span>.extract::&lt;<span class="kw-2">&amp;</span>str&gt;(py)<span class="question-mark">? </span>{
+        <span class="macro">stringify!</span>(OrderAccepted) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Accepted(
+            order_event.extract::&lt;OrderAccepted&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderCancelRejected) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::CancelRejected(
+            order_event.extract::&lt;OrderCancelRejected&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderCanceled) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Canceled(
+            order_event.extract::&lt;OrderCanceled&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderDenied) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Denied(
+            order_event.extract::&lt;OrderDenied&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderEmulated) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Emulated(
+            order_event.extract::&lt;OrderEmulated&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderExpired) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Expired(
+            order_event.extract::&lt;OrderExpired&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderFilled) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Filled(
+            order_event.extract::&lt;OrderFilled&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderInitialized) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Initialized(
+            order_event.extract::&lt;OrderInitialized&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderModifyRejected) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::ModifyRejected(
+            order_event.extract::&lt;OrderModifyRejected&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderPendingCancel) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::PendingCancel(
+            order_event.extract::&lt;OrderPendingCancel&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderPendingUpdate) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::PendingUpdate(
+            order_event.extract::&lt;OrderPendingUpdate&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderRejected) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Rejected(
+            order_event.extract::&lt;OrderRejected&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderReleased) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Released(
+            order_event.extract::&lt;OrderReleased&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderSubmitted) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Submitted(
+            order_event.extract::&lt;OrderSubmitted&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderTriggered) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Triggered(
+            order_event.extract::&lt;OrderTriggered&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="macro">stringify!</span>(OrderUpdated) =&gt; <span class="prelude-val">Ok</span>(OrderEventAny::Updated(
+            order_event.extract::&lt;OrderUpdated&gt;(py)<span class="question-mark">?</span>,
+        )),
+        <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(to_pyvalue_err(
+            <span class="string">"Error in conversion from `PyObject` to `OrderEventAny`"</span>,
+        )),
     }
 }
-
-<span class="kw">pub mod </span>accepted;
-<span class="kw">pub mod </span>cancel_rejected;
-<span class="kw">pub mod </span>canceled;
-<span class="kw">pub mod </span>denied;
-<span class="kw">pub mod </span>emulated;
-<span class="kw">pub mod </span>expired;
-<span class="kw">pub mod </span>filled;
-<span class="kw">pub mod </span>initialized;
-<span class="kw">pub mod </span>modify_rejected;
-<span class="kw">pub mod </span>pending_cancel;
-<span class="kw">pub mod </span>pending_update;
-<span class="kw">pub mod </span>rejected;
-<span class="kw">pub mod </span>released;
-<span class="kw">pub mod </span>submitted;
-<span class="kw">pub mod </span>triggered;
-<span class="kw">pub mod </span>updated;
 </code></pre></div></section></main></body></html>

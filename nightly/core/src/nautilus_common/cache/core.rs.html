@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `common/src/cache/core.rs`."><title>core.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (6e1d94708 2024-05-10)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `common/src/cache/core.rs`."><title>core.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (78a775127 2024-05-11)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2792,6 +2792,59 @@
 <a href="#2792" id="2792">2792</a>
 <a href="#2793" id="2793">2793</a>
 <a href="#2794" id="2794">2794</a>
+<a href="#2795" id="2795">2795</a>
+<a href="#2796" id="2796">2796</a>
+<a href="#2797" id="2797">2797</a>
+<a href="#2798" id="2798">2798</a>
+<a href="#2799" id="2799">2799</a>
+<a href="#2800" id="2800">2800</a>
+<a href="#2801" id="2801">2801</a>
+<a href="#2802" id="2802">2802</a>
+<a href="#2803" id="2803">2803</a>
+<a href="#2804" id="2804">2804</a>
+<a href="#2805" id="2805">2805</a>
+<a href="#2806" id="2806">2806</a>
+<a href="#2807" id="2807">2807</a>
+<a href="#2808" id="2808">2808</a>
+<a href="#2809" id="2809">2809</a>
+<a href="#2810" id="2810">2810</a>
+<a href="#2811" id="2811">2811</a>
+<a href="#2812" id="2812">2812</a>
+<a href="#2813" id="2813">2813</a>
+<a href="#2814" id="2814">2814</a>
+<a href="#2815" id="2815">2815</a>
+<a href="#2816" id="2816">2816</a>
+<a href="#2817" id="2817">2817</a>
+<a href="#2818" id="2818">2818</a>
+<a href="#2819" id="2819">2819</a>
+<a href="#2820" id="2820">2820</a>
+<a href="#2821" id="2821">2821</a>
+<a href="#2822" id="2822">2822</a>
+<a href="#2823" id="2823">2823</a>
+<a href="#2824" id="2824">2824</a>
+<a href="#2825" id="2825">2825</a>
+<a href="#2826" id="2826">2826</a>
+<a href="#2827" id="2827">2827</a>
+<a href="#2828" id="2828">2828</a>
+<a href="#2829" id="2829">2829</a>
+<a href="#2830" id="2830">2830</a>
+<a href="#2831" id="2831">2831</a>
+<a href="#2832" id="2832">2832</a>
+<a href="#2833" id="2833">2833</a>
+<a href="#2834" id="2834">2834</a>
+<a href="#2835" id="2835">2835</a>
+<a href="#2836" id="2836">2836</a>
+<a href="#2837" id="2837">2837</a>
+<a href="#2838" id="2838">2838</a>
+<a href="#2839" id="2839">2839</a>
+<a href="#2840" id="2840">2840</a>
+<a href="#2841" id="2841">2841</a>
+<a href="#2842" id="2842">2842</a>
+<a href="#2843" id="2843">2843</a>
+<a href="#2844" id="2844">2844</a>
+<a href="#2845" id="2845">2845</a>
+<a href="#2846" id="2846">2846</a>
+<a href="#2847" id="2847">2847</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -2901,7 +2954,8 @@
     venue_account: HashMap&lt;Venue, AccountId&gt;,
     venue_orders: HashMap&lt;Venue, HashSet&lt;ClientOrderId&gt;&gt;,
     venue_positions: HashMap&lt;Venue, HashSet&lt;PositionId&gt;&gt;,
-    order_ids: HashMap&lt;VenueOrderId, ClientOrderId&gt;,
+    venue_order_ids: HashMap&lt;VenueOrderId, ClientOrderId&gt;,
+    client_order_ids: HashMap&lt;ClientOrderId, VenueOrderId&gt;,
     order_position: HashMap&lt;ClientOrderId, PositionId&gt;,
     order_strategy: HashMap&lt;ClientOrderId, StrategyId&gt;,
     order_client: HashMap&lt;ClientOrderId, ClientId&gt;,
@@ -2933,7 +2987,8 @@
         <span class="self">self</span>.venue_account.clear();
         <span class="self">self</span>.venue_orders.clear();
         <span class="self">self</span>.venue_positions.clear();
-        <span class="self">self</span>.order_ids.clear();
+        <span class="self">self</span>.venue_order_ids.clear();
+        <span class="self">self</span>.client_order_ids.clear();
         <span class="self">self</span>.order_position.clear();
         <span class="self">self</span>.order_strategy.clear();
         <span class="self">self</span>.order_client.clear();
@@ -2993,7 +3048,8 @@
             venue_account: HashMap::new(),
             venue_orders: HashMap::new(),
             venue_positions: HashMap::new(),
-            order_ids: HashMap::new(),
+            venue_order_ids: HashMap::new(),
+            client_order_ids: HashMap::new(),
             order_position: HashMap::new(),
             order_strategy: HashMap::new(),
             order_client: HashMap::new(),
@@ -3156,7 +3212,7 @@
             <span class="comment">// 2: Build index.order_ids -&gt; {VenueOrderId, ClientOrderId}
             </span><span class="kw">if let </span><span class="prelude-val">Some</span>(venue_order_id) = order.venue_order_id() {
                 <span class="self">self</span>.index
-                    .order_ids
+                    .venue_order_ids
                     .insert(venue_order_id, <span class="kw-2">*</span>client_order_id);
             }
 
@@ -3436,10 +3492,20 @@
             }
         }
 
-        <span class="kw">for </span>client_order_id <span class="kw">in </span><span class="self">self</span>.index.order_ids.values() {
+        <span class="kw">for </span>client_order_id <span class="kw">in </span><span class="self">self</span>.index.venue_order_ids.values() {
             <span class="kw">if </span>!<span class="self">self</span>.orders.contains_key(client_order_id) {
                 <span class="macro">error!</span>(
-                    <span class="string">"{} in `index.order_ids`: {} not found in `self.orders`"</span>,
+                    <span class="string">"{} in `index.venue_order_ids`: {} not found in `self.orders`"</span>,
+                    failure, client_order_id
+                );
+                error_count += <span class="number">1</span>;
+            }
+        }
+
+        <span class="kw">for </span>client_order_id <span class="kw">in </span><span class="self">self</span>.index.client_order_ids.keys() {
+            <span class="kw">if </span>!<span class="self">self</span>.orders.contains_key(client_order_id) {
+                <span class="macro">error!</span>(
+                    <span class="string">"{} in `index.client_order_ids`: {} not found in `self.orders`"</span>,
                     failure, client_order_id
                 );
                 error_count += <span class="number">1</span>;
@@ -3886,6 +3952,34 @@
         <span class="prelude-val">Ok</span>(())
     }
 
+    <span class="doccomment">/// Index the given client order ID with the given venue order ID.
+    </span><span class="kw">pub fn </span>add_venue_order_id(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        client_order_id: <span class="kw-2">&amp;</span>ClientOrderId,
+        venue_order_id: <span class="kw-2">&amp;</span>VenueOrderId,
+        overwrite: bool,
+    ) -&gt; anyhow::Result&lt;()&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(existing_venue_order_id) = <span class="self">self</span>.index.client_order_ids.get(client_order_id) {
+            <span class="kw">if </span>!overwrite &amp;&amp; existing_venue_order_id != venue_order_id {
+                <span class="macro">anyhow::bail!</span>(
+                    <span class="string">"Existing {existing_venue_order_id} for {client_order_id}
+                    did not match the given {venue_order_id}.
+                    If you are writing a test then try a different `venue_order_id`,
+                    otherwise this is probably a bug."
+                </span>);
+            }
+        };
+
+        <span class="self">self</span>.index
+            .client_order_ids
+            .insert(<span class="kw-2">*</span>client_order_id, <span class="kw-2">*</span>venue_order_id);
+        <span class="self">self</span>.index
+            .venue_order_ids
+            .insert(<span class="kw-2">*</span>venue_order_id, <span class="kw-2">*</span>client_order_id);
+
+        <span class="prelude-val">Ok</span>(())
+    }
+
     <span class="doccomment">/// Add the order to the cache indexed with any given identifiers.
     ///
     /// # Parameters
@@ -4123,8 +4217,12 @@
 
         <span class="comment">// Update venue order ID
         </span><span class="kw">if let </span><span class="prelude-val">Some</span>(venue_order_id) = order.venue_order_id() {
-            <span class="comment">// Assumes order_id does not change
-            </span><span class="self">self</span>.index.order_ids.insert(venue_order_id, client_order_id);
+            <span class="comment">// If the order is being modified then we allow a changing `VenueOrderId` to accommodate
+            // venues which use a cancel+replace update strategy.
+            </span><span class="kw">if </span>!<span class="self">self</span>.index.venue_order_ids.contains_key(<span class="kw-2">&amp;</span>venue_order_id) {
+                <span class="comment">// TODO: If the last event was `OrderUpdated` then overwrite should be true
+                </span><span class="self">self</span>.add_venue_order_id(<span class="kw-2">&amp;</span>order.client_order_id(), <span class="kw-2">&amp;</span>venue_order_id, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
+            };
         }
 
         <span class="comment">// Update in-flight state
@@ -4513,14 +4611,12 @@
 
     <span class="attr">#[must_use]
     </span><span class="kw">pub fn </span>client_order_id(<span class="kw-2">&amp;</span><span class="self">self</span>, venue_order_id: <span class="kw-2">&amp;</span>VenueOrderId) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ClientOrderId&gt; {
-        <span class="self">self</span>.index.order_ids.get(venue_order_id)
+        <span class="self">self</span>.index.venue_order_ids.get(venue_order_id)
     }
 
     <span class="attr">#[must_use]
-    </span><span class="kw">pub fn </span>venue_order_id(<span class="kw-2">&amp;</span><span class="self">self</span>, client_order_id: <span class="kw-2">&amp;</span>ClientOrderId) -&gt; <span class="prelude-ty">Option</span>&lt;VenueOrderId&gt; {
-        <span class="self">self</span>.orders
-            .get(client_order_id)
-            .and_then(nautilus_model::polymorphism::GetVenueOrderId::venue_order_id)
+    </span><span class="kw">pub fn </span>venue_order_id(<span class="kw-2">&amp;</span><span class="self">self</span>, client_order_id: <span class="kw-2">&amp;</span>ClientOrderId) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>VenueOrderId&gt; {
+        <span class="self">self</span>.index.client_order_ids.get(client_order_id)
     }
 
     <span class="attr">#[must_use]
@@ -5193,7 +5289,7 @@
         orders::{any::OrderAny, stubs::TestOrderStubs},
         polymorphism::{
             ApplyOrderEventAny, GetAccountId, GetClientOrderId, GetInstrumentId, GetStrategyId,
-            GetTraderId, IsOpen,
+            GetTraderId, GetVenueOrderId, IsOpen,
         },
         types::{price::Price, quantity::Quantity},
     };
@@ -5322,6 +5418,7 @@
         <span class="macro">assert_eq!</span>(cache.orders_emulated_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(cache.orders_inflight_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(cache.orders_total_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(cache.venue_order_id(<span class="kw-2">&amp;</span>order.client_order_id()), <span class="prelude-val">None</span>);
     }
 
     <span class="attr">#[rstest]
@@ -5370,6 +5467,7 @@
         <span class="macro">assert_eq!</span>(cache.orders_emulated_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(cache.orders_inflight_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(cache.orders_total_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(cache.venue_order_id(<span class="kw-2">&amp;</span>order.client_order_id()), <span class="prelude-val">None</span>);
     }
 
     <span class="attr">#[rstest]
@@ -5435,6 +5533,14 @@
         <span class="macro">assert_eq!</span>(cache.orders_emulated_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(cache.orders_inflight_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(cache.orders_total_count(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(
+            cache.client_order_id(<span class="kw-2">&amp;</span>order.venue_order_id().unwrap()),
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>order.client_order_id())
+        );
+        <span class="macro">assert_eq!</span>(
+            cache.venue_order_id(<span class="kw-2">&amp;</span>order.client_order_id()),
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>order.venue_order_id().unwrap())
+        );
     }
 
     <span class="attr">#[rstest]

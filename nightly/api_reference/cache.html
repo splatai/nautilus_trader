@@ -3334,9 +3334,11 @@ accessed by many components.
                 config
                </strong>
                (
-               <em>
-                CacheConfig
-               </em>
+               <a class="reference internal" href="config.html#nautilus_trader.cache.config.CacheConfig" title="nautilus_trader.cache.config.CacheConfig">
+                <em>
+                 CacheConfig
+                </em>
+               </a>
                <em>
                 ,
                </em>
@@ -4335,7 +4337,7 @@ be serialized), offering maximum flexibility.
                bool
               </span>
               <span class="pre">
-               override=False
+               overwrite=False
               </span>
              </span>
             </em>
@@ -4427,7 +4429,7 @@ ID.
                <li>
                 <p>
                  <strong>
-                  override
+                  overwrite
                  </strong>
                  (
                  <em>
@@ -4439,7 +4441,7 @@ ID.
                  <em>
                   default False
                  </em>
-                 ) – If the added order should ‘override’ any existing order and replace
+                 ) – If the added order should ‘overwrite’ any existing order and replace
 it in the cache. This is currently used for emulated orders which are
 being released and transformed into another type.
                 </p>
@@ -5333,6 +5335,17 @@ being released and transformed into another type.
               </span>
              </span>
             </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               bool
+              </span>
+              <span class="pre">
+               overwrite=False
+              </span>
+             </span>
+            </em>
             <span class="sig-paren">
              )
             </span>
@@ -5391,6 +5404,26 @@ being released and transformed into another type.
                  ) – The venue order ID to index.
                 </p>
                </li>
+               <li>
+                <p>
+                 <strong>
+                  overwrite
+                 </strong>
+                 (
+                 <em>
+                  bool
+                 </em>
+                 <em>
+                  ,
+                 </em>
+                 <em>
+                  default False
+                 </em>
+                 ) – If the venue order ID will ‘overwrite’ any existing indexing and replace
+it in the cache. This is currently used for updated orders where the venue
+order ID may change.
+                </p>
+               </li>
               </ul>
              </dd>
              <dt class="field-even">
@@ -5404,7 +5437,11 @@ being released and transformed into another type.
                <strong>
                 ValueError
                </strong>
-               – If the
+               – If
+               <cite>
+                overwrite
+               </cite>
+               is False and the
                <cite>
                 client_order_id
                </cite>
@@ -17604,9 +17641,11 @@ where a position is snapshot when no longer open.
                 config
                </strong>
                (
-               <em>
-                CacheConfig
-               </em>
+               <a class="reference internal" href="config.html#nautilus_trader.cache.config.CacheConfig" title="nautilus_trader.cache.config.CacheConfig">
+                <em>
+                 CacheConfig
+                </em>
+               </a>
                <em>
                 ,
                </em>

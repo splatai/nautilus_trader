@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/python/orders/stop_limit.rs`."><title>stop_limit.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (6e1d94708 2024-05-10)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/python/orders/stop_limit.rs`."><title>stop_limit.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (78a775127 2024-05-11)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -667,6 +667,19 @@
 <a href="#667" id="667">667</a>
 <a href="#668" id="668">668</a>
 <a href="#669" id="669">669</a>
+<a href="#670" id="670">670</a>
+<a href="#671" id="671">671</a>
+<a href="#672" id="672">672</a>
+<a href="#673" id="673">673</a>
+<a href="#674" id="674">674</a>
+<a href="#675" id="675">675</a>
+<a href="#676" id="676">676</a>
+<a href="#677" id="677">677</a>
+<a href="#678" id="678">678</a>
+<a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -684,7 +697,11 @@
 
 </span><span class="kw">use </span>std::collections::HashMap;
 
-<span class="kw">use </span>nautilus_core::{nanos::UnixNanos, python::to_pyvalue_err, uuid::UUID4};
+<span class="kw">use </span>nautilus_core::{
+    nanos::UnixNanos,
+    python::{to_pyruntime_err, to_pyvalue_err},
+    uuid::UUID4,
+};
 <span class="kw">use </span>pyo3::{basic::CompareOp, prelude::<span class="kw-2">*</span>, types::PyDict};
 <span class="kw">use </span>ustr::Ustr;
 
@@ -700,7 +717,10 @@
         base::{str_hashmap_to_ustr, Order},
         stop_limit::StopLimitOrder,
     },
-    python::{common::commissions_from_hashmap, events::order::convert_order_event_to_pyobject},
+    python::{
+        common::commissions_from_hashmap,
+        events::order::{order_event_to_pyobject, pyobject_to_order_event},
+    },
     types::{price::Price, quantity::Quantity},
 };
 
@@ -885,7 +905,7 @@
     #[pyo3(name = <span class="string">"init_event"</span>)]
     </span><span class="kw">fn </span>py_init_event(<span class="kw-2">&amp;</span><span class="self">self</span>, py: Python&lt;<span class="lifetime">'_</span>&gt;) -&gt; PyResult&lt;PyObject&gt; {
         <span class="kw">match </span><span class="self">self</span>.init_event() {
-            <span class="prelude-val">Some</span>(event) =&gt; convert_order_event_to_pyobject(py, event),
+            <span class="prelude-val">Some</span>(event) =&gt; order_event_to_pyobject(py, event),
             <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Ok</span>(py.<span class="prelude-val">None</span>()),
         }
     }
@@ -1021,7 +1041,7 @@
     </span><span class="kw">fn </span>py_events(<span class="kw-2">&amp;</span><span class="self">self</span>, py: Python&lt;<span class="lifetime">'_</span>&gt;) -&gt; PyResult&lt;Vec&lt;PyObject&gt;&gt; {
         <span class="self">self</span>.events()
             .into_iter()
-            .map(|order_event| convert_order_event_to_pyobject(py, order_event.clone()))
+            .map(|event| order_event_to_pyobject(py, event.clone()))
             .collect()
     }
 
@@ -1334,6 +1354,12 @@
         )
         .unwrap();
         <span class="prelude-val">Ok</span>(stop_limit_order)
+    }
+
+    <span class="attr">#[pyo3(name = <span class="string">"apply"</span>)]
+    </span><span class="kw">fn </span>py_apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, event: PyObject, py: Python&lt;<span class="lifetime">'_</span>&gt;) -&gt; PyResult&lt;()&gt; {
+        <span class="kw">let </span>event_any = pyobject_to_order_event(py, event).unwrap();
+        <span class="self">self</span>.apply(event_any).map(|<span class="kw">_</span>| ()).map_err(to_pyruntime_err)
     }
 }
 </code></pre></div></section></main></body></html>
