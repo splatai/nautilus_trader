@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `common/src/timer.rs`."><title>timer.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="nautilus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (78a775127 2024-05-11)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `common/src/timer.rs`."><title>timer.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="nautilus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (ab14f944a 2024-05-13)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -543,6 +543,8 @@
 <a href="#543" id="543">543</a>
 <a href="#544" id="544">544</a>
 <a href="#545" id="545">545</a>
+<a href="#546" id="546">546</a>
+<a href="#547" id="547">547</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -564,6 +566,7 @@
     cmp::Ordering,
     ffi::c_char,
     fmt::{Display, Formatter},
+    num::NonZeroU64,
     sync::{
         atomic::{<span class="self">self</span>, AtomicBool, AtomicU64},
         Arc,
@@ -571,11 +574,8 @@
 };
 
 <span class="kw">use </span>nautilus_core::{
-    correctness::{check_positive_u64, check_valid_string},
-    datetime::floor_to_nearest_microsecond,
-    nanos::{DurationNanos, UnixNanos},
-    time::get_atomic_clock_realtime,
-    uuid::UUID4,
+    correctness::check_valid_string, datetime::floor_to_nearest_microsecond, nanos::UnixNanos,
+    time::get_atomic_clock_realtime, uuid::UUID4,
 };
 <span class="attr">#[cfg(feature = <span class="string">"python"</span>)]
 </span><span class="kw">use </span>pyo3::{types::PyCapsule, IntoPy, PyObject, Python};
@@ -665,23 +665,11 @@
     }
 }
 
-<span class="kw">pub trait </span>Timer {
-    <span class="kw">fn </span>new(
-        name: Ustr,
-        interval_ns: DurationNanos,
-        start_time_ns: UnixNanos,
-        stop_time_ns: <span class="prelude-ty">Option</span>&lt;UnixNanos&gt;,
-    ) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn </span>pop_event(<span class="kw-2">&amp;</span><span class="self">self</span>, event_id: UUID4, ts_init: UnixNanos) -&gt; TimeEvent;
-    <span class="kw">fn </span>iterate_next_time(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ts_now: UnixNanos);
-    <span class="kw">fn </span>cancel(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
-}
-
 <span class="doccomment">/// Provides a test timer for user with a `TestClock`.
 </span><span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>TestTimer {
     <span class="kw">pub </span>name: Ustr,
-    <span class="kw">pub </span>interval_ns: u64,
+    <span class="kw">pub </span>interval_ns: NonZeroU64,
     <span class="kw">pub </span>start_time_ns: UnixNanos,
     <span class="kw">pub </span>stop_time_ns: <span class="prelude-ty">Option</span>&lt;UnixNanos&gt;,
     next_time_ns: UnixNanos,
@@ -696,14 +684,15 @@
         stop_time_ns: <span class="prelude-ty">Option</span>&lt;UnixNanos&gt;,
     ) -&gt; anyhow::Result&lt;<span class="self">Self</span>&gt; {
         check_valid_string(name, <span class="macro">stringify!</span>(name))<span class="question-mark">?</span>;
-        check_positive_u64(interval_ns, <span class="macro">stringify!</span>(interval_ns))<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: Guaranteed to be non-zero
+        </span><span class="kw">let </span>interval_ns = NonZeroU64::new(std::cmp::max(interval_ns, <span class="number">1</span>)).unwrap();
 
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
             name: Ustr::from(name),
             interval_ns,
             start_time_ns,
             stop_time_ns,
-            next_time_ns: start_time_ns + interval_ns,
+            next_time_ns: start_time_ns + interval_ns.get(),
             is_expired: <span class="bool-val">false</span>,
         })
     }
@@ -732,8 +721,9 @@
     /// of events. A [`TimeEvent`] is appended for each time a next event is
     /// &lt;= the given `to_time_ns`.
     </span><span class="kw">pub fn </span>advance(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to_time_ns: UnixNanos) -&gt; <span class="kw">impl </span>Iterator&lt;Item = TimeEvent&gt; + <span class="lifetime">'_ </span>{
-        <span class="kw">let </span>advances = to_time_ns.saturating_sub(<span class="self">self</span>.next_time_ns.as_u64() - <span class="self">self</span>.interval_ns)
-            / <span class="self">self</span>.interval_ns;
+        <span class="kw">let </span>advances = to_time_ns
+            .saturating_sub(<span class="self">self</span>.next_time_ns.as_u64() - <span class="self">self</span>.interval_ns.get())
+            / <span class="self">self</span>.interval_ns.get();
         <span class="self">self</span>.take(advances <span class="kw">as </span>usize).map(|(event, <span class="kw">_</span>)| event)
     }
 
@@ -777,7 +767,7 @@
 <span class="doccomment">/// Provides a live timer for use with a `LiveClock`.
 </span><span class="kw">pub struct </span>LiveTimer {
     <span class="kw">pub </span>name: Ustr,
-    <span class="kw">pub </span>interval_ns: u64,
+    <span class="kw">pub </span>interval_ns: NonZeroU64,
     <span class="kw">pub </span>start_time_ns: UnixNanos,
     <span class="kw">pub </span>stop_time_ns: <span class="prelude-ty">Option</span>&lt;UnixNanos&gt;,
     next_time_ns: Arc&lt;AtomicU64&gt;,
@@ -795,7 +785,8 @@
         callback: EventHandler,
     ) -&gt; anyhow::Result&lt;<span class="self">Self</span>&gt; {
         check_valid_string(name, <span class="macro">stringify!</span>(name))<span class="question-mark">?</span>;
-        check_positive_u64(interval_ns, <span class="macro">stringify!</span>(interval_ns))<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: Guaranteed to be non-zero
+        </span><span class="kw">let </span>interval_ns = NonZeroU64::new(std::cmp::max(interval_ns, <span class="number">1</span>)).unwrap();
 
         <span class="macro">debug!</span>(<span class="string">"Creating timer '{}'"</span>, name);
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
@@ -803,7 +794,7 @@
             interval_ns,
             start_time_ns,
             stop_time_ns,
-            next_time_ns: Arc::new(AtomicU64::new(start_time_ns.as_u64() + interval_ns)),
+            next_time_ns: Arc::new(AtomicU64::new(start_time_ns.as_u64() + interval_ns.get())),
             is_expired: Arc::new(AtomicBool::new(<span class="bool-val">false</span>)),
             callback,
             canceler: <span class="prelude-val">None</span>,
@@ -823,10 +814,9 @@
     <span class="kw">pub fn </span>start(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="kw">let </span>event_name = <span class="self">self</span>.name;
         <span class="kw">let </span>stop_time_ns = <span class="self">self</span>.stop_time_ns;
-        <span class="kw">let </span><span class="kw-2">mut </span>start_time_ns = <span class="self">self</span>.start_time_ns;
         <span class="kw">let </span>next_time_ns = <span class="self">self</span>.next_time_ns.load(atomic::Ordering::SeqCst);
         <span class="kw">let </span>next_time_atomic = <span class="self">self</span>.next_time_ns.clone();
-        <span class="kw">let </span>interval_ns = <span class="self">self</span>.interval_ns;
+        <span class="kw">let </span>interval_ns = <span class="self">self</span>.interval_ns.get();
         <span class="kw">let </span>is_expired = <span class="self">self</span>.is_expired.clone();
         <span class="kw">let </span>callback = <span class="self">self</span>.callback.clone();
 
@@ -842,11 +832,6 @@
             <span class="kw">let </span>clock = get_atomic_clock_realtime();
             <span class="kw">let </span>now_ns = clock.get_time_ns();
 
-            <span class="kw">if </span>start_time_ns == <span class="number">0 </span>{
-                <span class="comment">// No start was specified so start immediately
-                </span>start_time_ns = now_ns;
-            }
-
             <span class="kw">let </span>start = <span class="kw">if </span>next_time_ns &lt;= now_ns {
                 Instant::now()
             } <span class="kw">else </span>{
@@ -854,14 +839,6 @@
                 </span><span class="kw">let </span>delay = Duration::from_millis(<span class="number">1</span>);
                 <span class="kw">let </span>diff: u64 = (next_time_ns - now_ns).into();
                 Instant::now() + Duration::from_nanos(diff) - delay
-            };
-
-            <span class="kw">if let </span><span class="prelude-val">Some</span>(stop_time_ns) = stop_time_ns {
-                <span class="macro">assert!</span>(stop_time_ns &gt; now_ns, <span class="string">"stop_time was &lt; now_ns"</span>);
-                <span class="macro">assert!</span>(
-                    start_time_ns + interval_ns &lt;= stop_time_ns,
-                    <span class="string">"start_time + interval was &gt; stop_time"
-                </span>);
             };
 
             <span class="kw">let </span><span class="kw-2">mut </span>timer = tokio::time::interval_at(start, Duration::from_nanos(interval_ns));
@@ -880,7 +857,7 @@
 
                         <span class="comment">// Check if expired
                         </span><span class="kw">if let </span><span class="prelude-val">Some</span>(stop_time_ns) = stop_time_ns {
-                            <span class="kw">if </span>next_time_ns &gt;= stop_time_ns {
+                            <span class="kw">if </span>std::cmp::max(next_time_ns, now_ns) &gt;= stop_time_ns {
                                 <span class="kw">break</span>; <span class="comment">// Timer expired
                             </span>}
                         }
@@ -1086,6 +1063,33 @@
 
         wait_until(|| timer.is_expired(), Duration::from_secs(<span class="number">2</span>));
         <span class="macro">assert!</span>(timer.next_time_ns() &gt; next_time_ns);
+    }
+
+    <span class="attr">#[tokio::test]
+    </span><span class="kw">async fn </span>test_live_timer_with_zero_interval_and_immediate_stop_time() {
+        pyo3::prepare_freethreaded_python();
+
+        <span class="kw">let </span>handler = Python::with_gil(|py| {
+            <span class="kw">let </span>callable = <span class="macro">wrap_pyfunction!</span>(receive_event, py).unwrap();
+            EventHandler::new(callable.into_py(py))
+        });
+
+        <span class="comment">// Create a new LiveTimer with a stop time
+        </span><span class="kw">let </span>clock = get_atomic_clock_realtime();
+        <span class="kw">let </span>start_time = UnixNanos::default();
+        <span class="kw">let </span>interval_ns = <span class="number">0</span>;
+        <span class="kw">let </span>stop_time = clock.get_time_ns();
+        <span class="kw">let </span><span class="kw-2">mut </span>timer = LiveTimer::new(
+            <span class="string">"TEST_TIMER"</span>,
+            interval_ns,
+            start_time,
+            <span class="prelude-val">Some</span>(stop_time),
+            handler,
+        )
+        .unwrap();
+        timer.start();
+
+        wait_until(|| timer.is_expired(), Duration::from_secs(<span class="number">2</span>));
     }
 }
 </code></pre></div></section></main></body></html>
