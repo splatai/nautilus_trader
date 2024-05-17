@@ -52,7 +52,7 @@
   </script>
   <link href="../_static/images/apple-icon-152x152.png" rel="apple-touch-icon"/>
   <title>
-   Adapter Development Guide
+   Adapters
   </title>
   <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
   <link href="../_static/material.css" rel="stylesheet" type="text/css"/>
@@ -131,7 +131,7 @@
        <span class="md-header-nav__topic">
        </span>
        <span class="md-header-nav__topic">
-        Adapter Development Guide
+        Adapters
        </span>
       </div>
      </div>
@@ -680,7 +680,7 @@
              </li>
              <li class="md-nav__item md-nav__link--active">
               <a class="md-nav__link" href="#">
-               Adapter Development Guide
+               Adapters
               </a>
              </li>
              <li class="md-nav__item">
@@ -706,7 +706,7 @@
          <ul class="md-nav__list" data-md-scrollfix="">
           <li class="md-nav__item">
            <a class="md-nav__link" href="#developer-guide-adapters--page-root">
-            Adapter Development Guide
+            Adapters
            </a>
            <span class="arrow">
             <i class="fa-solid fa-chevron-right">
@@ -773,9 +773,9 @@
      </div>
      <div class="md-content">
       <article class="md-content__inner md-typeset" role="main">
-       <section class="tex2jax_ignore mathjax_ignore" id="adapter-development-guide">
+       <section class="tex2jax_ignore mathjax_ignore" id="adapters">
         <h1 id="developer-guide-adapters--page-root">
-         Adapter Development Guide
+         Adapters
          <a class="headerlink" href="#developer-guide-adapters--page-root" title="Permalink to this heading">
           ¶
          </a>
@@ -930,6 +930,27 @@ into a unified interface.
 includes loading all available instruments, specific instruments by ID, and applying filters to the
 instrument list.
           </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">from</span> <span class="nn">nautilus_trader.common.providers</span> <span class="kn">import</span> <span class="n">InstrumentProvider</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.model.identifiers</span> <span class="kn">import</span> <span class="n">InstrumentId</span>
+
+<span class="k">class</span> <span class="nc">TemplateInstrumentProvider</span><span class="p">(</span><span class="n">InstrumentProvider</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    An example template of an ``InstrumentProvider`` showing the minimal methods which must be implemented for an integration to be complete.</span>
+<span class="sd">    """</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">load_all_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `load_all_async` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">load_ids_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">InstrumentId</span><span class="p">],</span> <span class="n">filters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `load_ids_async` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">load_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span><span class="p">,</span> <span class="n">filters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `load_async` must be implemented in the subclass"</span><span class="p">)</span>
+</pre>
+           </div>
+          </div>
           <p>
            <strong>
             Key Methods:
@@ -986,6 +1007,40 @@ instrument list.
 related to market data. This might include news feeds, custom data streams, or other data sources
 that enhance trading strategies but do not directly represent market activity.
           </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">from</span> <span class="nn">nautilus_trader.live.data_client</span> <span class="kn">import</span> <span class="n">LiveDataClient</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.model.data</span> <span class="kn">import</span> <span class="n">DataType</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.core.uuid</span> <span class="kn">import</span> <span class="n">UUID4</span>
+
+<span class="k">class</span> <span class="nc">TemplateLiveDataClient</span><span class="p">(</span><span class="n">LiveDataClient</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    An example of a ``LiveDataClient`` highlighting the overridable abstract methods.</span>
+<span class="sd">    """</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_connect` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_disconnect` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `reset` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dispose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `dispose` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="n">DataType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_subscribe` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="n">DataType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_unsubscribe` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">correlation_id</span><span class="p">:</span> <span class="n">UUID4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_request` must be implemented in the subclass"</span><span class="p">)</span>
+</pre>
+           </div>
+          </div>
           <p>
            <strong>
             Key Methods:
@@ -1082,6 +1137,44 @@ that enhance trading strategies but do not directly represent market activity.
 and instrument status updates. It focuses on providing historical and real-time market data that is essential for
 trading operations.
           </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">from</span> <span class="nn">nautilus_trader.live.data_client</span> <span class="kn">import</span> <span class="n">LiveMarketDataClient</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.model.data</span> <span class="kn">import</span> <span class="n">BarType</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.model.enums</span> <span class="kn">import</span> <span class="n">BookType</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.model.identifiers</span> <span class="kn">import</span> <span class="n">InstrumentId</span>
+
+<span class="k">class</span> <span class="nc">TemplateLiveMarketDataClient</span><span class="p">(</span><span class="n">LiveMarketDataClient</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    An example of a ``LiveMarketDataClient`` highlighting the overridable abstract methods.</span>
+<span class="sd">    """</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_connect` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_disconnect` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `reset` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dispose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `dispose` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_subscribe_instruments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_subscribe_instruments` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_unsubscribe_instruments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_unsubscribe_instruments` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_subscribe_order_book_deltas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span><span class="p">,</span> <span class="n">book_type</span><span class="p">:</span> <span class="n">BookType</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_subscribe_order_book_deltas` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_unsubscribe_order_book_deltas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_unsubscribe_order_book_deltas` must be implemented in the subclass"</span><span class="p">)</span>
+</pre>
+           </div>
+          </div>
           <p>
            <strong>
             Key Methods:
@@ -1188,6 +1281,58 @@ trading operations.
 cancellation of orders. It is a crucial component of the adapter that interacts with the venues
 trading system to manage and execute trades.
           </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">from</span> <span class="nn">nautilus_trader.execution.messages</span> <span class="kn">import</span> <span class="n">CancelAllOrders</span><span class="p">,</span> <span class="n">CancelOrder</span><span class="p">,</span> <span class="n">ModifyOrder</span><span class="p">,</span> <span class="n">SubmitOrder</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.execution.reports</span> <span class="kn">import</span> <span class="n">FillReport</span><span class="p">,</span> <span class="n">OrderStatusReport</span><span class="p">,</span> <span class="n">PositionStatusReport</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.live.execution_client</span> <span class="kn">import</span> <span class="n">LiveExecutionClient</span>
+<span class="kn">from</span> <span class="nn">nautilus_trader.model.identifiers</span> <span class="kn">import</span> <span class="n">ClientOrderId</span><span class="p">,</span> <span class="n">InstrumentId</span><span class="p">,</span> <span class="n">VenueOrderId</span>
+
+<span class="k">class</span> <span class="nc">TemplateLiveExecutionClient</span><span class="p">(</span><span class="n">LiveExecutionClient</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    An example of a ``LiveExecutionClient`` highlighting the method requirements.</span>
+<span class="sd">    """</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_connect` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_disconnect` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_submit_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">SubmitOrder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_submit_order` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_modify_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">ModifyOrder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_modify_order` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_cancel_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">CancelOrder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_cancel_order` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_cancel_all_orders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">CancelAllOrders</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `_cancel_all_orders` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">generate_order_status_report</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span><span class="p">,</span> <span class="n">client_order_id</span><span class="p">:</span> <span class="n">ClientOrderId</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">venue_order_id</span><span class="p">:</span> <span class="n">VenueOrderId</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrderStatusReport</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `generate_order_status_report` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">generate_order_status_reports</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">open_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">OrderStatusReport</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `generate_order_status_reports` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">generate_fill_reports</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">venue_order_id</span><span class="p">:</span> <span class="n">VenueOrderId</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FillReport</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `generate_fill_reports` must be implemented in the subclass"</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">generate_position_status_reports</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">instrument_id</span><span class="p">:</span> <span class="n">InstrumentId</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PositionStatusReport</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"method `generate_position_status_reports` must be implemented in the subclass"</span><span class="p">)</span>
+</pre>
+           </div>
+          </div>
           <p>
            <strong>
             Key Methods:
@@ -1308,6 +1453,30 @@ trading system to manage and execute trades.
 details. These settings are essential for initializing and managing the adapter’s connection to the
 data provider.
           </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">from</span> <span class="nn">nautilus_trader.config</span> <span class="kn">import</span> <span class="n">LiveDataClientConfig</span><span class="p">,</span> <span class="n">LiveExecClientConfig</span>
+
+<span class="k">class</span> <span class="nc">TemplateDataClientConfig</span><span class="p">(</span><span class="n">LiveDataClientConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Configuration for ``TemplateDataClient`` instances.</span>
+<span class="sd">    """</span>
+
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">api_secret</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">class</span> <span class="nc">TemplateExecClientConfig</span><span class="p">(</span><span class="n">LiveExecClientConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Configuration for ``TemplateExecClient`` instances.</span>
+<span class="sd">    """</span>
+
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">api_secret</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span>
+</pre>
+           </div>
+          </div>
           <p>
            <strong>
             Key Attributes:
