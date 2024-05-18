@@ -960,6 +960,7 @@ integration written for it, this then allows external publishing of messages.
           </p>
           <p>
            Currently Redis is supported for all serializable messages which are published.
+The minimum supported Redis version is 6.2.0.
           </p>
          </div>
          <p>
@@ -1411,6 +1412,9 @@ Automatic stream trimming helps manage the size of your message streams by remov
             </code>
             as a maximum width (plus roughly a minute, as streams are trimmed no more than once per minute).
 Rather than for instance a maximum lookback window based on the current wall clock time.
+           </p>
+           <p>
+            The minimum supported Redis version is 6.2.0.
            </p>
           </div>
          </section>

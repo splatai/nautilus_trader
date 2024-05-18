@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `common/src/cache/core.rs`."><title>core.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (8c127df75 2024-05-16)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `common/src/cache/core.rs`."><title>core.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (1a7397988 2024-05-17)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2841,10 +2841,6 @@
 <a href="#2841" id="2841">2841</a>
 <a href="#2842" id="2842">2842</a>
 <a href="#2843" id="2843">2843</a>
-<a href="#2844" id="2844">2844</a>
-<a href="#2845" id="2845">2845</a>
-<a href="#2846" id="2846">2846</a>
-<a href="#2847" id="2847">2847</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -3804,7 +3800,7 @@
         check_valid_string(key, <span class="macro">stringify!</span>(key))<span class="question-mark">?</span>;
         check_slice_not_empty(value.as_slice(), <span class="macro">stringify!</span>(value))<span class="question-mark">?</span>;
 
-        <span class="macro">debug!</span>(<span class="string">"Add general {key}"</span>);
+        <span class="macro">debug!</span>(<span class="string">"Adding general {key}"</span>);
         <span class="self">self</span>.general.insert(key.to_string(), value.clone());
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(database) = <span class="kw-2">&amp;</span><span class="self">self</span>.database {
@@ -3815,14 +3811,14 @@
 
     <span class="doccomment">/// Add the given order `book` to the cache.
     </span><span class="kw">pub fn </span>add_order_book(<span class="kw-2">&amp;mut </span><span class="self">self</span>, book: OrderBook) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `OrderBook` {}"</span>, book.instrument_id);
+        <span class="macro">debug!</span>(<span class="string">"Adding `OrderBook` {}"</span>, book.instrument_id);
         <span class="self">self</span>.books.insert(book.instrument_id, book);
         <span class="prelude-val">Ok</span>(())
     }
 
     <span class="doccomment">/// Add the given `quote` tick to the cache.
     </span><span class="kw">pub fn </span>add_quote(<span class="kw-2">&amp;mut </span><span class="self">self</span>, quote: QuoteTick) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `QuoteTick` {}"</span>, quote.instrument_id);
+        <span class="macro">debug!</span>(<span class="string">"Adding `QuoteTick` {}"</span>, quote.instrument_id);
         <span class="kw">let </span>quotes_deque = <span class="self">self
             </span>.quotes
             .entry(quote.instrument_id)
@@ -3836,7 +3832,7 @@
         check_slice_not_empty(quotes, <span class="macro">stringify!</span>(quotes))<span class="question-mark">?</span>;
 
         <span class="kw">let </span>instrument_id = quotes[<span class="number">0</span>].instrument_id;
-        <span class="macro">debug!</span>(<span class="string">"Add `QuoteTick`[{}] {}"</span>, quotes.len(), instrument_id);
+        <span class="macro">debug!</span>(<span class="string">"Adding `QuoteTick`[{}] {}"</span>, quotes.len(), instrument_id);
         <span class="kw">let </span>quotes_deque = <span class="self">self
             </span>.quotes
             .entry(instrument_id)
@@ -3850,7 +3846,7 @@
 
     <span class="doccomment">/// Add the given `trade` tick to the cache.
     </span><span class="kw">pub fn </span>add_trade(<span class="kw-2">&amp;mut </span><span class="self">self</span>, trade: TradeTick) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `TradeTick` {}"</span>, trade.instrument_id);
+        <span class="macro">debug!</span>(<span class="string">"Adding `TradeTick` {}"</span>, trade.instrument_id);
         <span class="kw">let </span>trades_deque = <span class="self">self
             </span>.trades
             .entry(trade.instrument_id)
@@ -3864,7 +3860,7 @@
         check_slice_not_empty(trades, <span class="macro">stringify!</span>(trades))<span class="question-mark">?</span>;
 
         <span class="kw">let </span>instrument_id = trades[<span class="number">0</span>].instrument_id;
-        <span class="macro">debug!</span>(<span class="string">"Add `TradeTick`[{}] {}"</span>, trades.len(), instrument_id);
+        <span class="macro">debug!</span>(<span class="string">"Adding `TradeTick`[{}] {}"</span>, trades.len(), instrument_id);
         <span class="kw">let </span>trades_deque = <span class="self">self
             </span>.trades
             .entry(instrument_id)
@@ -3878,7 +3874,7 @@
 
     <span class="doccomment">/// Add the given `bar` to the cache.
     </span><span class="kw">pub fn </span>add_bar(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bar: Bar) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `Bar` {}"</span>, bar.bar_type);
+        <span class="macro">debug!</span>(<span class="string">"Adding `Bar` {}"</span>, bar.bar_type);
         <span class="kw">let </span>bars = <span class="self">self
             </span>.bars
             .entry(bar.bar_type)
@@ -3892,7 +3888,7 @@
         check_slice_not_empty(bars, <span class="macro">stringify!</span>(bars))<span class="question-mark">?</span>;
 
         <span class="kw">let </span>bar_type = bars[<span class="number">0</span>].bar_type;
-        <span class="macro">debug!</span>(<span class="string">"Add `Bar`[{}] {}"</span>, bars.len(), bar_type);
+        <span class="macro">debug!</span>(<span class="string">"Adding `Bar`[{}] {}"</span>, bars.len(), bar_type);
         <span class="kw">let </span>bars_deque = <span class="self">self
             </span>.bars
             .entry(bar_type)
@@ -3906,7 +3902,7 @@
 
     <span class="doccomment">/// Add the given `currency` to the cache.
     </span><span class="kw">pub fn </span>add_currency(<span class="kw-2">&amp;mut </span><span class="self">self</span>, currency: Currency) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `Currency` {}"</span>, currency.code);
+        <span class="macro">debug!</span>(<span class="string">"Adding `Currency` {}"</span>, currency.code);
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(database) = <span class="kw-2">&amp;</span><span class="self">self</span>.database {
             database.add_currency(<span class="kw-2">&amp;</span>currency)<span class="question-mark">?</span>;
@@ -3918,7 +3914,7 @@
 
     <span class="doccomment">/// Add the given `instrument` to the cache.
     </span><span class="kw">pub fn </span>add_instrument(<span class="kw-2">&amp;mut </span><span class="self">self</span>, instrument: InstrumentAny) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `Instrument` {}"</span>, instrument.id());
+        <span class="macro">debug!</span>(<span class="string">"Adding `Instrument` {}"</span>, instrument.id());
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(database) = <span class="kw-2">&amp;</span><span class="self">self</span>.database {
             database.add_instrument(<span class="kw-2">&amp;</span>instrument)<span class="question-mark">?</span>;
@@ -3930,7 +3926,7 @@
 
     <span class="doccomment">/// Add the given `synthetic` instrument to the cache.
     </span><span class="kw">pub fn </span>add_synthetic(<span class="kw-2">&amp;mut </span><span class="self">self</span>, synthetic: SyntheticInstrument) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `SyntheticInstrument` {}"</span>, synthetic.id);
+        <span class="macro">debug!</span>(<span class="string">"Adding `SyntheticInstrument` {}"</span>, synthetic.id);
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(database) = <span class="kw-2">&amp;</span><span class="self">self</span>.database {
             database.add_synthetic(<span class="kw-2">&amp;</span>synthetic)<span class="question-mark">?</span>;
@@ -3942,7 +3938,7 @@
 
     <span class="doccomment">/// Add the given `account` to the cache.
     </span><span class="kw">pub fn </span>add_account(<span class="kw-2">&amp;mut </span><span class="self">self</span>, account: Box&lt;<span class="kw">dyn </span>Account&gt;) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="macro">debug!</span>(<span class="string">"Add `Account` {}"</span>, account.id());
+        <span class="macro">debug!</span>(<span class="string">"Adding `Account` {}"</span>, account.id());
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(database) = <span class="kw-2">&amp;</span><span class="self">self</span>.database {
             database.add_account(account.as_ref())<span class="question-mark">?</span>;
@@ -4032,7 +4028,7 @@
             )<span class="question-mark">?</span>;
         };
 
-        <span class="macro">debug!</span>(<span class="string">"Added {:?}"</span>, order);
+        <span class="macro">debug!</span>(<span class="string">"Adding {:?}"</span>, order);
 
         <span class="self">self</span>.index.orders.insert(client_order_id);
         <span class="self">self</span>.index
@@ -4162,6 +4158,8 @@
         <span class="self">self</span>.index.positions.insert(position.id);
         <span class="self">self</span>.index.positions_open.insert(position.id);
 
+        <span class="macro">log::debug!</span>(<span class="string">"Adding {position}"</span>);
+
         <span class="self">self</span>.add_position_id(
             <span class="kw-2">&amp;</span>position.id,
             <span class="kw-2">&amp;</span>position.instrument_id.venue,
@@ -4181,12 +4179,6 @@
             .entry(instrument_id)
             .or_default();
         instrument_positions.insert(position.id);
-
-        <span class="macro">log::debug!</span>(
-            <span class="string">"Added Position(id={}, strategy_id={})"</span>,
-            position.id,
-            position.strategy_id,
-        );
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(database) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.database {
             database.add_position(<span class="kw-2">&amp;</span>position)<span class="question-mark">?</span>;
