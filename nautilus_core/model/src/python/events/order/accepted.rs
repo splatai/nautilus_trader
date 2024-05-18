@@ -74,6 +74,7 @@ impl OrderAccepted {
         self.to_string()
     }
 
+    #[getter]
     fn type_str(&self) -> &str {
         stringify!(OrderAccepted)
     }

@@ -144,6 +144,7 @@ impl OrderInitialized {
         from_dict_pyo3(py, values)
     }
 
+    #[getter]
     fn type_str(&self) -> &str {
         stringify!(OrderInitiliazed)
     }
