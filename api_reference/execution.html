@@ -679,6 +679,11 @@
               </a>
              </li>
              <li class="md-nav__item">
+              <a class="md-nav__link" href="../developer_guide/adapters.html">
+               Adapters
+              </a>
+             </li>
+             <li class="md-nav__item">
               <a class="md-nav__link" href="../developer_guide/packaged_data.html">
                Packaged Data
               </a>
@@ -3620,15 +3625,6 @@
                </span>
                <ul class="submenu">
                 <li class="md-nav__item">
-                 <a class="md-nav__link" href="#nautilus_trader.execution.engine.ExecutionEngine.allow_cash_positions">
-                  <code class="docutils literal notranslate">
-                   <span class="pre">
-                    ExecutionEngine.allow_cash_positions
-                   </span>
-                  </code>
-                 </a>
-                </li>
-                <li class="md-nav__item">
                  <a class="md-nav__link" href="#nautilus_trader.execution.engine.ExecutionEngine.check_connected">
                   <code class="docutils literal notranslate">
                    <span class="pre">
@@ -5656,9 +5652,11 @@ trading operations.
             <span class="w">
             </span>
             <span class="n">
-             <span class="pre">
-              ExecAlgorithmConfig
-             </span>
+             <a class="reference internal" href="config.html#nautilus_trader.execution.config.ExecAlgorithmConfig" title="nautilus_trader.execution.config.ExecAlgorithmConfig">
+              <span class="pre">
+               ExecAlgorithmConfig
+              </span>
+             </a>
              <span class="w">
              </span>
              <span class="p">
@@ -5724,9 +5722,11 @@ trading operations.
                config
               </strong>
               (
-              <em>
-               ExecAlgorithmConfig
-              </em>
+              <a class="reference internal" href="config.html#nautilus_trader.execution.config.ExecAlgorithmConfig" title="nautilus_trader.execution.config.ExecAlgorithmConfig">
+               <em>
+                ExecAlgorithmConfig
+               </em>
+              </a>
               <em>
                ,
               </em>
@@ -16693,7 +16693,7 @@ and so the results of
              <em class="sig-param">
               <span class="n">
                <span class="pre">
-                unicode
+                list
                </span>
                <span class="pre">
                 tags=None
@@ -16952,7 +16952,16 @@ and so the results of
                   </strong>
                   (
                   <em>
+                   list
+                  </em>
+                  <em>
+                   [
+                  </em>
+                  <em>
                    str
+                  </em>
+                  <em>
+                   ]
                   </em>
                   <em>
                    ,
@@ -16960,8 +16969,7 @@ and so the results of
                   <em>
                    optional
                   </em>
-                  ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+                  ) – The custom user tags for the order.
                  </p>
                 </li>
                 <li>
@@ -17145,7 +17153,7 @@ contain any arbitrary delimiter if required.
              <em class="sig-param">
               <span class="n">
                <span class="pre">
-                unicode
+                list
                </span>
                <span class="pre">
                 tags=None
@@ -17304,7 +17312,16 @@ contain any arbitrary delimiter if required.
                   </strong>
                   (
                   <em>
+                   list
+                  </em>
+                  <em>
+                   [
+                  </em>
+                  <em>
                    str
+                  </em>
+                  <em>
+                   ]
                   </em>
                   <em>
                    ,
@@ -17312,8 +17329,7 @@ contain any arbitrary delimiter if required.
                   <em>
                    optional
                   </em>
-                  ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+                  ) – The custom user tags for the order.
                  </p>
                 </li>
                 <li>
@@ -17510,7 +17526,7 @@ contain any arbitrary delimiter if required.
              <em class="sig-param">
               <span class="n">
                <span class="pre">
-                unicode
+                list
                </span>
                <span class="pre">
                 tags=None
@@ -17737,7 +17753,16 @@ contain any arbitrary delimiter if required.
                   </strong>
                   (
                   <em>
+                   list
+                  </em>
+                  <em>
+                   [
+                  </em>
+                  <em>
                    str
+                  </em>
+                  <em>
+                   ]
                   </em>
                   <em>
                    ,
@@ -17745,8 +17770,7 @@ contain any arbitrary delimiter if required.
                   <em>
                    optional
                   </em>
-                  ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+                  ) – The custom user tags for the order.
                  </p>
                 </li>
                 <li>
@@ -18365,7 +18389,7 @@ If
                    default False
                   </em>
                   ) – If the bar aggregator should await the arrival of a historical partial bar prior
-to activaely aggregating new bars.
+to actively aggregating new bars.
                  </p>
                 </li>
                </ul>
@@ -19926,9 +19950,11 @@ If
                →
               </span>
               <span class="sig-return-typehint">
-               <span class="pre">
-                ImportableExecAlgorithmConfig
-               </span>
+               <a class="reference internal" href="config.html#nautilus_trader.execution.config.ImportableExecAlgorithmConfig" title="nautilus_trader.execution.config.ImportableExecAlgorithmConfig">
+                <span class="pre">
+                 ImportableExecAlgorithmConfig
+                </span>
+               </a>
               </span>
              </span>
              <a class="headerlink" href="#nautilus_trader.execution.algorithm.ExecAlgorithm.to_importable_config" title="Permalink to this definition">
@@ -21624,9 +21650,11 @@ If
                  config
                 </strong>
                 (
-                <em>
-                 NautilusConfig
-                </em>
+                <a class="reference internal" href="config.html#nautilus_trader.common.config.NautilusConfig" title="nautilus_trader.common.config.NautilusConfig">
+                 <em>
+                  NautilusConfig
+                 </em>
+                </a>
                 <em>
                  ,
                 </em>
@@ -26060,9 +26088,11 @@ then the component state will not change, and an error will be logged.
                  config
                 </strong>
                 (
-                <em>
-                 OrderEmulatorConfig
-                </em>
+                <a class="reference internal" href="config.html#nautilus_trader.common.config.OrderEmulatorConfig" title="nautilus_trader.common.config.OrderEmulatorConfig">
+                 <em>
+                  OrderEmulatorConfig
+                 </em>
+                </a>
                 <em>
                  ,
                 </em>
@@ -34668,7 +34698,7 @@ If
                    default False
                   </em>
                   ) – If the bar aggregator should await the arrival of a historical partial bar prior
-to activaely aggregating new bars.
+to actively aggregating new bars.
                  </p>
                 </li>
                </ul>
@@ -36321,9 +36351,11 @@ If
                →
               </span>
               <span class="sig-return-typehint">
-               <span class="pre">
-                ImportableActorConfig
-               </span>
+               <a class="reference internal" href="config.html#nautilus_trader.common.config.ImportableActorConfig" title="nautilus_trader.common.config.ImportableActorConfig">
+                <span class="pre">
+                 ImportableActorConfig
+                </span>
+               </a>
               </span>
              </span>
              <a class="headerlink" href="#nautilus_trader.execution.emulator.OrderEmulator.to_importable_config" title="Permalink to this definition">
@@ -37918,9 +37950,11 @@ trading commands and events.
                  config
                 </strong>
                 (
-                <em>
-                 ExecEngineConfig
-                </em>
+                <a class="reference internal" href="config.html#nautilus_trader.execution.config.ExecEngineConfig" title="nautilus_trader.execution.config.ExecEngineConfig">
+                 <em>
+                  ExecEngineConfig
+                 </em>
+                </a>
                 <em>
                  ,
                 </em>
@@ -37953,38 +37987,6 @@ trading commands and events.
               </cite>
               .
              </p>
-            </dd>
-           </dl>
-           <dl class="py attribute">
-            <dt class="sig sig-object py" id="nautilus_trader.execution.engine.ExecutionEngine.allow_cash_positions">
-             <span class="sig-name descname">
-              <span class="pre">
-               allow_cash_positions
-              </span>
-             </span>
-             <a class="headerlink" href="#nautilus_trader.execution.engine.ExecutionEngine.allow_cash_positions" title="Permalink to this definition">
-              ¶
-             </a>
-            </dt>
-            <dd>
-             <p>
-              If unleveraged spot/cash assets should generate positions.
-             </p>
-             <dl class="field-list simple">
-              <dt class="field-odd">
-               Returns
-               <span class="colon">
-                :
-               </span>
-              </dt>
-              <dd class="field-odd">
-               <p>
-                <cite>
-                 bool
-                </cite>
-               </p>
-              </dd>
-             </dl>
             </dd>
            </dl>
            <dl class="py method">
@@ -40225,9 +40227,11 @@ venue routing cannot be found).
               </dt>
               <dd class="field-even">
                <p>
-                <strong>
-                 InvalidConfiguration
-                </strong>
+                <a class="reference internal" href="config.html#nautilus_trader.common.config.InvalidConfiguration" title="nautilus_trader.common.config.InvalidConfiguration">
+                 <strong>
+                  InvalidConfiguration
+                 </strong>
+                </a>
                 – If a strategy is already registered to claim external orders for an instrument ID.
                </p>
               </dd>

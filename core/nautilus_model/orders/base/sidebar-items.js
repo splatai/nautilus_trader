@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["LimitOrderAny","OrderAny","OrderError","PassiveOrderAny","StopOrderAny"],"fn":["str_hashmap_to_ustr","ustr_hashmap_to_str"],"struct":["OrderCore"],"trait":["Order"]};
+window.SIDEBAR_ITEMS = {"enum":["OrderError"],"fn":["str_hashmap_to_ustr","ustr_hashmap_to_str"],"struct":["OrderCore"],"trait":["Order"]};

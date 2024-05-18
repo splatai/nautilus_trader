@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["UnixNanos"],"type":["TimedeltaNanos","TsEvent","TsInit"]};
+window.SIDEBAR_ITEMS = {"struct":["UnixNanos"],"type":["DurationNanos"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["python","redis"]};
+window.SIDEBAR_ITEMS = {"mod":["python","redis","sql"]};

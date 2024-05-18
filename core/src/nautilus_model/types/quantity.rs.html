@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/types/quantity.rs`."><title>quantity.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-081576b923113409.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.79.0-nightly (e3181b091 2024-04-18)" data-channel="nightly" data-search-js="search-5b46ae87cc198d72.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-e32f0c247825364d.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../nautilus_model/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `model/src/types/quantity.rs`."><title>quantity.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="nautilus_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0-nightly (1a7397988 2024-05-17)" data-channel="nightly" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -501,6 +501,17 @@
 <a href="#501" id="501">501</a>
 <a href="#502" id="502">502</a>
 <a href="#503" id="503">503</a>
+<a href="#504" id="504">504</a>
+<a href="#505" id="505">505</a>
+<a href="#506" id="506">506</a>
+<a href="#507" id="507">507</a>
+<a href="#508" id="508">508</a>
+<a href="#509" id="509">509</a>
+<a href="#510" id="510">510</a>
+<a href="#511" id="511">511</a>
+<a href="#512" id="512">512</a>
+<a href="#513" id="513">513</a>
+<a href="#514" id="514">514</a>
 </pre></div><pre class="rust"><code><span class="comment">// -------------------------------------------------------------------------------------------------
 //  Copyright (C) 2015-2024 Nautech Systems Pty Ltd. All rights reserved.
 //  https://nautechsystems.io
@@ -518,7 +529,7 @@
 
 </span><span class="kw">use </span>std::{
     cmp::Ordering,
-    fmt::{Debug, Display, Formatter},
+    fmt::{Debug, Display},
     hash::{Hash, Hasher},
     ops::{Add, AddAssign, Deref, Mul, MulAssign, Sub, SubAssign},
     str::FromStr,
@@ -613,8 +624,9 @@
 
     <span class="kw">fn </span>from_str(input: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         <span class="kw">let </span>float_from_input = input
+            .replace(<span class="string">'_'</span>, <span class="string">""</span>)
             .parse::&lt;f64&gt;()
-            .map_err(|e| <span class="macro">format!</span>(<span class="string">"Cannot parse `input` string '{input}' as f64: {e}"</span>))<span class="question-mark">?</span>;
+            .map_err(|e| <span class="macro">format!</span>(<span class="string">"Error parsing `input` string '{input}' as f64: {e}"</span>))<span class="question-mark">?</span>;
 
         <span class="self">Self</span>::new(float_from_input, precision_from_str(input))
             .map_err(|e: anyhow::Error| e.to_string())
@@ -749,13 +761,19 @@
 }
 
 <span class="kw">impl </span>Debug <span class="kw">for </span>Quantity {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">"{:.*}"</span>, <span class="self">self</span>.precision <span class="kw">as </span>usize, <span class="self">self</span>.as_f64())
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="macro">write!</span>(
+            f,
+            <span class="string">"{}({:.*})"</span>,
+            <span class="macro">stringify!</span>(Quantity),
+            <span class="self">self</span>.precision <span class="kw">as </span>usize,
+            <span class="self">self</span>.as_f64(),
+        )
     }
 }
 
 <span class="kw">impl </span>Display <span class="kw">for </span>Quantity {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="macro">write!</span>(f, <span class="string">"{:.*}"</span>, <span class="self">self</span>.precision <span class="kw">as </span>usize, <span class="self">self</span>.as_f64())
     }
 }
@@ -865,6 +883,7 @@
         <span class="macro">assert_eq!</span>(qty.raw, <span class="number">18_446_744_073_000_000_000</span>);
         <span class="macro">assert_eq!</span>(qty.as_decimal(), <span class="macro">dec!</span>(<span class="number">18_446_744_073</span>));
         <span class="macro">assert_eq!</span>(qty.to_string(), <span class="string">"18446744073.00000000"</span>);
+        <span class="macro">assert_eq!</span>(qty.to_formatted_string(), <span class="string">"18_446_744_073.00000000"</span>);
     }
 
     <span class="attr">#[rstest]
@@ -994,14 +1013,17 @@
     }
 
     <span class="attr">#[rstest]
+    </span><span class="kw">fn </span>test_debug() {
+        <span class="kw">let </span>quantity = Quantity::from_str(<span class="string">"44.12"</span>).unwrap();
+        <span class="kw">let </span>result = <span class="macro">format!</span>(<span class="string">"{quantity:?}"</span>);
+        <span class="macro">assert_eq!</span>(result, <span class="string">"Quantity(44.12)"</span>);
+    }
+
+    <span class="attr">#[rstest]
     </span><span class="kw">fn </span>test_display() {
-        <span class="kw">use </span>std::fmt::Write <span class="kw">as </span>FmtWrite;
-        <span class="kw">let </span>input_string = <span class="string">"44.12"</span>;
-        <span class="kw">let </span>qty = Quantity::from_str(input_string).unwrap();
-        <span class="kw">let </span><span class="kw-2">mut </span>res = String::new();
-        <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>res, <span class="string">"{qty}"</span>).unwrap();
-        <span class="macro">assert_eq!</span>(res, input_string);
-        <span class="macro">assert_eq!</span>(qty.to_string(), input_string);
+        <span class="kw">let </span>quantity = Quantity::from_str(<span class="string">"44.12"</span>).unwrap();
+        <span class="kw">let </span>result = <span class="macro">format!</span>(<span class="string">"{quantity}"</span>);
+        <span class="macro">assert_eq!</span>(result, <span class="string">"44.12"</span>);
     }
 }
 </code></pre></div></section></main></body></html>

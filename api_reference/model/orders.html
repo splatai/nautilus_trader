@@ -684,6 +684,11 @@
               </a>
              </li>
              <li class="md-nav__item">
+              <a class="md-nav__link" href="../../developer_guide/adapters.html">
+               Adapters
+              </a>
+             </li>
+             <li class="md-nav__item">
               <a class="md-nav__link" href="../../developer_guide/packaged_data.html">
                Packaged Data
               </a>
@@ -785,6 +790,15 @@
                 <code class="docutils literal notranslate">
                  <span class="pre">
                   MarketOrder.contingency_type
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.market.MarketOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  MarketOrder.create()
                  </span>
                 </code>
                </a>
@@ -1466,6 +1480,15 @@
                 <code class="docutils literal notranslate">
                  <span class="pre">
                   LimitOrder.contingency_type
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.limit.LimitOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  LimitOrder.create()
                  </span>
                 </code>
                </a>
@@ -2188,6 +2211,15 @@
                </a>
               </li>
               <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.stop_market.StopMarketOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  StopMarketOrder.create()
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
                <a class="md-nav__link" href="#nautilus_trader.model.orders.stop_market.StopMarketOrder.emulation_trigger">
                 <code class="docutils literal notranslate">
                  <span class="pre">
@@ -2882,6 +2914,15 @@
                 <code class="docutils literal notranslate">
                  <span class="pre">
                   StopLimitOrder.contingency_type
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.stop_limit.StopLimitOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  StopLimitOrder.create()
                  </span>
                 </code>
                </a>
@@ -3631,6 +3672,15 @@
                </a>
               </li>
               <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.market_to_limit.MarketToLimitOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  MarketToLimitOrder.create()
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
                <a class="md-nav__link" href="#nautilus_trader.model.orders.market_to_limit.MarketToLimitOrder.display_qty">
                 <code class="docutils literal notranslate">
                  <span class="pre">
@@ -4330,6 +4380,15 @@
                </a>
               </li>
               <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.market_if_touched.MarketIfTouchedOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  MarketIfTouchedOrder.create()
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
                <a class="md-nav__link" href="#nautilus_trader.model.orders.market_if_touched.MarketIfTouchedOrder.emulation_trigger">
                 <code class="docutils literal notranslate">
                  <span class="pre">
@@ -5024,6 +5083,15 @@
                 <code class="docutils literal notranslate">
                  <span class="pre">
                   LimitIfTouchedOrder.contingency_type
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.limit_if_touched.LimitIfTouchedOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  LimitIfTouchedOrder.create()
                  </span>
                 </code>
                </a>
@@ -5764,6 +5832,15 @@
                </a>
               </li>
               <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.trailing_stop_market.TrailingStopMarketOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  TrailingStopMarketOrder.create()
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
                <a class="md-nav__link" href="#nautilus_trader.model.orders.trailing_stop_market.TrailingStopMarketOrder.emulation_trigger">
                 <code class="docutils literal notranslate">
                  <span class="pre">
@@ -6476,6 +6553,15 @@
                 <code class="docutils literal notranslate">
                  <span class="pre">
                   TrailingStopLimitOrder.contingency_type
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.orders.trailing_stop_limit.TrailingStopLimitOrder.create">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  TrailingStopLimitOrder.create()
                  </span>
                 </code>
                </a>
@@ -8140,7 +8226,7 @@ lists.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -8585,7 +8671,16 @@ bid/ask.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -8593,8 +8688,7 @@ bid/ask.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -9127,6 +9221,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.market.MarketOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.market.MarketOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -11335,7 +11463,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -12244,7 +12372,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -12816,7 +12944,16 @@ less favorable than your limit price, but it does not guarantee a fill.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -12824,8 +12961,7 @@ less favorable than your limit price, but it does not guarantee a fill.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -13378,6 +13514,43 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.limit.LimitOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               OrderInitialized
+              </span>
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.limit.LimitOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -15723,7 +15896,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -16632,7 +16805,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -17143,7 +17316,16 @@ and is typically used to limit a loss or protect a profit on a short position.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -17151,8 +17333,7 @@ and is typically used to limit a loss or protect a profit on a short position.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -17731,6 +17912,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.stop_market.StopMarketOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.stop_market.StopMarketOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -19972,7 +20187,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -20907,7 +21122,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -21487,7 +21702,16 @@ risk that the order may never fill, even if the stop price is reached.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -21495,8 +21719,7 @@ risk that the order may never fill, even if the stop price is reached.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -22091,6 +22314,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.stop_limit.StopLimitOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.stop_limit.StopLimitOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -24474,7 +24731,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -25375,7 +25632,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -25829,7 +26086,16 @@ executed.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -25837,8 +26103,7 @@ executed.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -26377,6 +26642,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.market_to_limit.MarketToLimitOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.market_to_limit.MarketToLimitOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -28694,7 +28993,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -29532,7 +29831,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -30036,7 +30335,16 @@ current market price, and a stop SELL order is placed below.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -30044,8 +30352,7 @@ current market price, and a stop SELL order is placed below.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -30624,6 +30931,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.market_if_touched.MarketIfTouchedOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.market_if_touched.MarketIfTouchedOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -32865,7 +33206,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -33800,7 +34141,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -34378,7 +34719,16 @@ will not execute at a price less favorable than the limit price.
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -34386,8 +34736,7 @@ will not execute at a price less favorable than the limit price.
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -34982,6 +35331,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.limit_if_touched.LimitIfTouchedOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.limit_if_touched.LimitIfTouchedOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -37331,7 +37714,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -38296,7 +38679,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -38828,7 +39211,16 @@ to the delta of market price and
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -38836,8 +39228,7 @@ to the delta of market price and
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -39426,6 +39817,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.trailing_stop_market.TrailingStopMarketOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.trailing_stop_market.TrailingStopMarketOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -41667,7 +42092,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -42723,7 +43148,7 @@ in full.
           <em class="sig-param">
            <span class="n">
             <span class="pre">
-             unicode
+             list
             </span>
             <span class="pre">
              tags=None
@@ -43348,7 +43773,16 @@ to the delta of market price and
                </strong>
                (
                <em>
+                list
+               </em>
+               <em>
+                [
+               </em>
+               <em>
                 str
+               </em>
+               <em>
+                ]
                </em>
                <em>
                 ,
@@ -43356,8 +43790,7 @@ to the delta of market price and
                <em>
                 optional
                </em>
-               ) – The custom user tags for the order. These are optional and can
-contain any arbitrary delimiter if required.
+               ) – The custom user tags for the order.
               </p>
              </li>
             </ul>
@@ -43962,6 +44395,40 @@ contain any arbitrary delimiter if required.
               </p>
              </dd>
             </dl>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.orders.trailing_stop_limit.TrailingStopLimitOrder.create">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              create
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               init
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.orders.trailing_stop_limit.TrailingStopLimitOrder.create" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
            </dd>
           </dl>
           <dl class="py attribute">
@@ -46349,7 +46816,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">
@@ -50131,7 +50598,7 @@ The possible statuses of closed orders include;
              <dd class="field-odd">
               <p>
                <cite>
-                str
+                list[str]
                </cite>
                or
                <code class="docutils literal notranslate">

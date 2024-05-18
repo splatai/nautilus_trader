@@ -684,6 +684,11 @@
               </a>
              </li>
              <li class="md-nav__item">
+              <a class="md-nav__link" href="../../developer_guide/adapters.html">
+               Adapters
+              </a>
+             </li>
+             <li class="md-nav__item">
               <a class="md-nav__link" href="../../developer_guide/packaged_data.html">
                Packaged Data
               </a>
@@ -776,6 +781,15 @@
                 <code class="docutils literal notranslate">
                  <span class="pre">
                   Bar.from_raw()
+                 </span>
+                </code>
+               </a>
+              </li>
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#nautilus_trader.model.data.Bar.from_raw_arrays_to_list">
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  Bar.from_raw_arrays_to_list()
                  </span>
                 </code>
                </a>
@@ -3370,6 +3384,167 @@
              </span>
             </span>
             <a class="headerlink" href="#nautilus_trader.model.data.Bar.from_raw" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
+           </dd>
+          </dl>
+          <dl class="py method">
+           <dt class="sig sig-object py" id="nautilus_trader.model.data.Bar.from_raw_arrays_to_list">
+            <em class="property">
+             <span class="pre">
+              static
+             </span>
+             <span class="w">
+             </span>
+            </em>
+            <span class="sig-name descname">
+             <span class="pre">
+              from_raw_arrays_to_list
+             </span>
+            </span>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               BarType
+              </span>
+              <span class="pre">
+               bar_type
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               uint8_t
+              </span>
+              <span class="pre">
+               price_prec
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               uint8_t
+              </span>
+              <span class="pre">
+               size_prec
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               int64_t[:]
+              </span>
+              <span class="pre">
+               opens
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               int64_t[:]
+              </span>
+              <span class="pre">
+               highs
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               int64_t[:]
+              </span>
+              <span class="pre">
+               lows
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               int64_t[:]
+              </span>
+              <span class="pre">
+               closes
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               uint64_t[:]
+              </span>
+              <span class="pre">
+               volumes
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               uint64_t[:]
+              </span>
+              <span class="pre">
+               ts_events
+              </span>
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              <span class="pre">
+               uint64_t[:]
+              </span>
+              <span class="pre">
+               ts_inits
+              </span>
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <span class="sig-return">
+             <span class="sig-return-icon">
+              →
+             </span>
+             <span class="sig-return-typehint">
+              <span class="pre">
+               list
+              </span>
+              <span class="p">
+               <span class="pre">
+                [
+               </span>
+              </span>
+              <a class="reference internal" href="#nautilus_trader.model.data.Bar" title="nautilus_trader.model.data.Bar">
+               <span class="pre">
+                Bar
+               </span>
+              </a>
+              <span class="p">
+               <span class="pre">
+                ]
+               </span>
+              </span>
+             </span>
+            </span>
+            <a class="headerlink" href="#nautilus_trader.model.data.Bar.from_raw_arrays_to_list" title="Permalink to this definition">
              ¶
             </a>
            </dt>
@@ -9020,7 +9195,7 @@ the key and value contents of metadata must themselves be hashable.
                <em>
                 uint8_t
                </em>
-               ) – The record flags bit field, indicating packet end and data information.
+               ) – The record flags bit field, indicating event end and data information.
 A value of zero indicates no flags.
               </p>
              </li>
@@ -9915,7 +10090,7 @@ If no sequence number provided in the source data then use a value of zero.
                  <em>
                   uint8_t
                  </em>
-                 ) – The record flags bit field, indicating packet end and data information.
+                 ) – The record flags bit field, indicating event end and data information.
 A value of zero indicates no flags.
                 </p>
                </li>
@@ -11702,7 +11877,7 @@ If no sequence number provided in the source data then use a value of zero.
                <em>
                 uint8_t
                </em>
-               ) – The record flags bit field, indicating packet end and data information.
+               ) – The record flags bit field, indicating event end and data information.
 A value of zero indicates no flags.
               </p>
              </li>

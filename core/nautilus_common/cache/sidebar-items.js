@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["database"],"struct":["Cache","CacheConfig","CacheIndex"]};
+window.SIDEBAR_ITEMS = {"mod":["core","database"]};

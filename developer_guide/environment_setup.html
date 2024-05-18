@@ -679,6 +679,11 @@
               </a>
              </li>
              <li class="md-nav__item">
+              <a class="md-nav__link" href="adapters.html">
+               Adapters
+              </a>
+             </li>
+             <li class="md-nav__item">
               <a class="md-nav__link" href="packaged_data.html">
                Packaged Data
               </a>
@@ -717,6 +722,42 @@
              <a class="md-nav__link" href="#builds">
               Builds
              </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="#services">
+              Services
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="#nautilus-cli-developer-guide">
+              Nautilus CLI Developer Guide
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="#introduction">
+              Introduction
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="#install">
+              Install
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="#commands">
+              Commands
+             </a>
+             <span class="arrow">
+              <i class="fa-solid fa-chevron-right">
+              </i>
+             </span>
+             <ul class="submenu">
+              <li class="md-nav__item">
+               <a class="md-nav__link" href="#database">
+                Database
+               </a>
+              </li>
+             </ul>
             </li>
            </ul>
           </li>
@@ -849,6 +890,487 @@
 </pre>
           </div>
          </div>
+        </section>
+        <section id="services">
+         <h2 id="services">
+          Services
+          <a class="headerlink" href="#services" title="Permalink to this heading">
+           ¶
+          </a>
+         </h2>
+         <p>
+          You can use
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            docker-compose.yml
+           </span>
+          </code>
+          file located in
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            .docker
+           </span>
+          </code>
+          directory
+to bootstrap the Nautilus working environment. This will start the following services:
+         </p>
+         <div class="highlight-bash notranslate">
+          <div class="highlight">
+           <pre><span></span>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre>
+          </div>
+         </div>
+         <p>
+          If you only want specific services running (like
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            postgres
+           </span>
+          </code>
+          for example), you can start them with command:
+         </p>
+         <div class="highlight-bash notranslate">
+          <div class="highlight">
+           <pre><span></span>docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
+</pre>
+          </div>
+         </div>
+         <p>
+          Used services are:
+         </p>
+         <ul class="simple">
+          <li>
+           <p>
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              postgres
+             </span>
+            </code>
+            - Postgres database with root user
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              POSTRES_USER
+             </span>
+            </code>
+            which defaults to
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              postgres
+             </span>
+            </code>
+            ,
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              POSTGRES_PASSWORD
+             </span>
+            </code>
+            which defaults to
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              pass
+             </span>
+            </code>
+            and
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              POSTGRES_DB
+             </span>
+            </code>
+            which defaults to
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              postgres
+             </span>
+            </code>
+           </p>
+          </li>
+          <li>
+           <p>
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              redis
+             </span>
+            </code>
+            - Redis server
+           </p>
+          </li>
+          <li>
+           <p>
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              pgadmin
+             </span>
+            </code>
+            - PgAdmin4 for database management and administration
+           </p>
+          </li>
+         </ul>
+         <blockquote>
+          <div>
+           <p>
+            <strong>
+             Note:
+            </strong>
+            Please use this as development environment only. For production, use a proper and  more secure setup.
+           </p>
+          </div>
+         </blockquote>
+         <p>
+          After the services has been started, you must log in with
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            psql
+           </span>
+          </code>
+          cli to create
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            nautilus
+           </span>
+          </code>
+          Postgres database.
+To do that you can run, and type
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            POSTGRES_PASSWORD
+           </span>
+          </code>
+          from docker service setup
+         </p>
+         <div class="highlight-bash notranslate">
+          <div class="highlight">
+           <pre><span></span>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">5432</span><span class="w"> </span>-U<span class="w"> </span>postgres
+</pre>
+          </div>
+         </div>
+         <p>
+          After you have logged in as
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            postgres
+           </span>
+          </code>
+          administrator, run
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            CREATE
+           </span>
+           <span class="pre">
+            DATABASE
+           </span>
+          </code>
+          command with target db name (we use
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            nautilus
+           </span>
+          </code>
+          ):
+         </p>
+         <div class="highlight-default notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="n">psql</span> <span class="p">(</span><span class="mf">16.2</span><span class="p">,</span> <span class="n">server</span> <span class="mf">15.2</span> <span class="p">(</span><span class="n">Debian</span> <span class="mf">15.2</span><span class="o">-</span><span class="mf">1.</span><span class="n">pgdg110</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Type</span> <span class="s2">"help"</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
+
+<span class="n">postgres</span><span class="o">=</span><span class="c1"># CREATE DATABASE nautilus;</span>
+<span class="n">CREATE</span> <span class="n">DATABASE</span>
+
+</pre>
+          </div>
+         </div>
+        </section>
+        <section id="nautilus-cli-developer-guide">
+         <h2 id="nautilus-cli-developer-guide">
+          Nautilus CLI Developer Guide
+          <a class="headerlink" href="#nautilus-cli-developer-guide" title="Permalink to this heading">
+           ¶
+          </a>
+         </h2>
+        </section>
+        <section id="introduction">
+         <h2 id="introduction">
+          Introduction
+          <a class="headerlink" href="#introduction" title="Permalink to this heading">
+           ¶
+          </a>
+         </h2>
+         <p>
+          The Nautilus CLI is a command-line interface tool designed to interact
+with the Nautilus Trader ecosystem. It provides commands for managing the Postgres database and other trading operations.
+         </p>
+         <blockquote>
+          <div>
+           <p>
+            <strong>
+             Note:
+            </strong>
+            The Nautilus CLI command is only supported on UNIX-like systems.
+           </p>
+          </div>
+         </blockquote>
+        </section>
+        <section id="install">
+         <h2 id="install">
+          Install
+          <a class="headerlink" href="#install" title="Permalink to this heading">
+           ¶
+          </a>
+         </h2>
+         <p>
+          You can install nautilus cli command with from Make file target, which will use
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            cargo
+           </span>
+           <span class="pre">
+            install
+           </span>
+          </code>
+          under the hood.
+And this command will install
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            nautilus
+           </span>
+          </code>
+          bin executable in your path if Rust
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            cargo
+           </span>
+          </code>
+          is properly configured.
+         </p>
+         <div class="highlight-bash notranslate">
+          <div class="highlight">
+           <pre><span></span>make<span class="w"> </span>install-cli
+</pre>
+          </div>
+         </div>
+        </section>
+        <section id="commands">
+         <h2 id="commands">
+          Commands
+          <a class="headerlink" href="#commands" title="Permalink to this heading">
+           ¶
+          </a>
+         </h2>
+         <p>
+          You can run
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            nautilus
+           </span>
+           <span class="pre">
+            --help
+           </span>
+          </code>
+          to inspect structure of CLI and groups of commands:
+         </p>
+         <section id="database">
+          <h3 id="database">
+           Database
+           <a class="headerlink" href="#database" title="Permalink to this heading">
+            ¶
+           </a>
+          </h3>
+          <p>
+           These are commands related to the bootstrapping the Postgres database.
+For that you work, you need to supply right connection configuration. You can do that through
+command line arguments or
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             .env
+            </span>
+           </code>
+           file in the root directory or where the commands is being run.
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               --host
+              </span>
+             </code>
+             arg or
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               POSTGRES_HOST
+              </span>
+             </code>
+             for database host
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               --port
+              </span>
+             </code>
+             arg or
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               POSTGRES_PORT
+              </span>
+             </code>
+             for database port
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               --user
+              </span>
+             </code>
+             arg or
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               POSTGRES_USER
+              </span>
+             </code>
+             for root administrator user to run command with (namely
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               postgres
+              </span>
+             </code>
+             root user here)
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               --password
+              </span>
+             </code>
+             arg or
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               POSTGRES_PASSWORD
+              </span>
+             </code>
+             for root administrator password
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               --database
+              </span>
+             </code>
+             arg or
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               POSTGRES_DATABASE
+              </span>
+             </code>
+             for both database
+             <strong>
+              name and new user
+             </strong>
+             that will have privileges of this database
+( if you provided
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               nautilus
+              </span>
+             </code>
+             as value, then new user will be created with name
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               nautilus
+              </span>
+             </code>
+             that will inherit the password from
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               POSTGRES_PASSWORD
+              </span>
+             </code>
+             and
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               nautilus
+              </span>
+             </code>
+             database with be bootstrapped with this user as owner)
+            </p>
+           </li>
+          </ul>
+          <p>
+           Example of
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             .env
+            </span>
+           </code>
+           file
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">POSTGRES_HOST</span><span class="o">=</span><span class="n">localhost</span>
+<span class="n">POSTGRES_PORT</span><span class="o">=</span><span class="mi">5432</span>
+<span class="n">POSTGRES_USERNAME</span><span class="o">=</span><span class="n">postgres</span>
+<span class="n">POSTGRES_DATABASE</span><span class="o">=</span><span class="n">nautilus</span>
+<span class="n">POSTGRES_PASSWORD</span><span class="o">=</span><span class="k">pass</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           List of commands are:
+          </p>
+          <ol class="arabic simple">
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               nautilus
+              </span>
+              <span class="pre">
+               database
+              </span>
+              <span class="pre">
+               init
+              </span>
+             </code>
+             - it will bootstrap schema, roles and all sql files located in
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               schema
+              </span>
+             </code>
+             root directory (like
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               tables.sql
+              </span>
+             </code>
+             )
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               nautilus
+              </span>
+              <span class="pre">
+               database
+              </span>
+              <span class="pre">
+               drop
+              </span>
+             </code>
+             - it will drop all tables, role and data in target Postgres database
+            </p>
+           </li>
+          </ol>
+         </section>
         </section>
        </section>
       </article>

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["SyntheticInstrument"]};
+window.SIDEBAR_ITEMS = {"enum":["SyntheticInstrumentBuilderError"],"struct":["SyntheticInstrument","SyntheticInstrumentBuilder"]};

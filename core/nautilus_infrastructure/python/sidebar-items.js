@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["infrastructure"],"mod":["redis"]};
+window.SIDEBAR_ITEMS = {"fn":["infrastructure"],"mod":["redis","sql"]};
